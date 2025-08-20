@@ -1,41 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ballero4Life</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Balleros4Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; background: #f7f7fa; }
+    h1, h2 { color: #222; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f0f0f5; }
+    .galleryItem { display: inline-block; margin: 0.5em; vertical-align: top; }
+    .galleryImg { max-width: 160px; max-height: 160px; border: 2px solid #ddd; }
+    #galleryPreview div { display: inline-block; margin: 0.5em; }
+    #galleryPreview img { max-width: 100px; max-height: 100px; border: 1px solid #ddd; }
+    ul { padding-left: 1.5em; }
+    .advice { background: #e6f2ff; padding: 8px; border-radius: 5px; margin-top: 0.5em; }
+    form { margin-bottom: 1.5em; }
+    input, select, button { margin: 0.2em 0.2em 0.2em 0; padding: 0.4em; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Ballero4Life</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="stats.html">Stats</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="advice.html">Coach Advice</a>
-      <a href="plays.html">Plays</a>
-    </nav>
-  </header>
-  <main>
-    <section id="upcoming-game">
-      <h2>Upcoming Game</h2>
-      <div id="nextGame"></div>
-    </section>
-    <section id="standings">
-      <h2>Team Standings</h2>
-      <div id="standingsTable"></div>
-    </section>
-    <section id="gallery-preview">
-      <h2>Game Gallery Preview</h2>
-      <div id="galleryPreview"></div>
-      <a href="gallery.html" class="btn">View All Photos</a>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2025 Ballero4Life</p>
-  </footer>
+  <h1>Balleros4Life</h1>
+  <hr>
+
+  <section>
+    <h2>Next Game</h2>
+    <div id="nextGame"></div>
+  </section>
+
+  <section>
+    <h2>Standings</h2>
+    <div id="standingsTable"></div>
+  </section>
+
+  <section>
+    <h2>Gallery Preview</h2>
+    <div id="galleryPreview"></div>
+  </section>
+
+  <section>
+    <h2>Full Gallery</h2>
+    <div id="galleryFull"></div>
+    <form id="uploadForm">
+      <input type="file" id="photoUpload" accept="image/*" />
+      <input type="text" id="photoCaption" placeholder="Caption" />
+      <button type="submit">Upload (local preview only)</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Player Stats</h2>
+    <div id="statsTable"></div>
+    <form id="statsForm">
+      <input type="text" id="playerName" placeholder="Player Name" required />
+      <input type="number" id="points" placeholder="Points" required />
+      <input type="number" id="rebounds" placeholder="Rebounds" required />
+      <input type="number" id="assists" placeholder="Assists" required />
+      <input type="date" id="gameDate" required />
+      <button type="submit">Add Stats</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Game Calendar</h2>
+    <div id="gameCalendar"></div>
+  </section>
+
+  <section>
+    <h2>Advice</h2>
+    <form id="adviceForm">
+      <select id="adviceTopic">
+        <option value="offense">Offense</option>
+        <option value="defense">Defense</option>
+        <option value="teamwork">Teamwork</option>
+        <option value="conditioning">Conditioning</option>
+        <option value="shooting">Shooting</option>
+      </select>
+      <button type="submit">Get Advice</button>
+    </form>
+    <div id="adviceResult"></div>
+  </section>
+
+  <section>
+    <h2>Plays</h2>
+    <ul id="playsList"></ul>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
