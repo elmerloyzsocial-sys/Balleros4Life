@@ -15,42 +15,6 @@ const standings = [
   { team: 'Bulls', wins: 0, losses: 2 }
 ];
 
-// Gallery: images in /gallery/ folder
-const repoOwner = "elmerloyzsocial-sys";
-const repoName = "Balleros4Life";
-const galleryFolder = "gallery";
-
-const galleryDiv = document.getElementById("galleryFull");
-
-// Fetch images from GitHub /gallery/ folder
-async function fetchGalleryImages() {
-  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Failed to fetch gallery images.");
-    const files = await response.json();
-
-    // Only show image files (jpg, jpeg, png, gif)
-    const imgFiles = files.filter(file =>
-      /\.(jpg|jpeg|png|gif)$/i.test(file.name)
-    );
-
-    // Display images
-    galleryDiv.innerHTML = imgFiles.map(file => `
-      <div class="galleryItem">
-        <img src="${file.download_url}" alt="${file.name}" class="galleryImg" />
-        <p>${file.name}</p>
-      </div>
-    `).join("");
-  } catch (err) {
-    galleryDiv.innerHTML = "<p>Could not load gallery images.</p>";
-    console.error(err);
-  }
-}
-
-// Call the function to load gallery images
-fetchGalleryImages();
-
 // Plays
 const plays = [
   {
@@ -88,12 +52,47 @@ function saveStats(stats) {
   localStorage.setItem('playerStats', JSON.stringify(stats));
 }
 
-// DOM logic per page
+// Gallery fetch from GitHub
+const repoOwner = "elmerloyzsocial-sys";
+const repoName = "Balleros4Life";
+const galleryFolder = "gallery";
+
+// Fetch images from GitHub /gallery/ folder and display in galleryFull
+async function fetchGalleryImages() {
+  const galleryDiv = document.getElementById("galleryFull");
+  if (!galleryDiv) return;
+
+  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error("Failed to fetch gallery images.");
+    const files = await response.json();
+
+    // Only show image files (jpg, jpeg, png, gif)
+    const imgFiles = files.filter(file =>
+      /\.(jpg|jpeg|png|gif)$/i.test(file.name)
+    );
+
+    // Display images
+    galleryDiv.innerHTML = imgFiles.map(file => `
+      <div class="galleryItem">
+        <img src="${file.download_url}" alt="${file.name}" class="galleryImg" />
+        <p>${file.name}</p>
+      </div>
+    `).join("");
+  } catch (err) {
+    galleryDiv.innerHTML = "<p>Could not load gallery images.</p>";
+    console.error(err);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-  // Home page
+  // Home page: Upcoming game, Standings, Gallery preview
   if (document.getElementById('nextGame')) {
     // Upcoming game
-    const upcoming = games.filter(g => !g.result && new Date(g.date) >= new Date()).sort((a,b) => new Date(a.date) - new Date(b.date))[0];
+    const upcoming = games
+      .filter(g => !g.result && new Date(g.date) >= new Date())
+      .sort((a,b) => new Date(a.date) - new Date(b.date))[0];
     document.getElementById('nextGame').innerHTML = upcoming ? `
       <b>Date:</b> ${upcoming.date}<br>
       <b>Opponent:</b> ${upcoming.opponent}<br>
@@ -106,44 +105,59 @@ document.addEventListener("DOMContentLoaded", function() {
     standingsHTML += `</table>`;
     document.getElementById('standingsTable').innerHTML = standingsHTML;
 
-    // Gallery preview
-    let previewHTML = '';
-    galleryImages.slice(0,3).forEach(img => {
-      previewHTML += `<div><img src="gallery/${img.file}" alt="${img.caption}"><br><small>${img.caption}</small></div>`;
-    });
-    document.getElementById('galleryPreview').innerHTML = previewHTML;
+    // Gallery preview (uses GitHub API, shows first 3 images)
+    const galleryPreviewDiv = document.getElementById('galleryPreview');
+    if (galleryPreviewDiv) {
+      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
+      fetch(apiUrl).then(response => {
+        if (!response.ok) throw new Error("Failed to fetch gallery images.");
+        return response.json();
+      }).then(files => {
+        const imgFiles = files.filter(file =>
+          /\.(jpg|jpeg|png|gif)$/i.test(file.name)
+        );
+        let previewHTML = '';
+        imgFiles.slice(0, 3).forEach(file => {
+          previewHTML += `<div>
+            <img src="${file.download_url}" alt="${file.name}" class="galleryImg"><br>
+            <small>${file.name}</small>
+          </div>`;
+        });
+        galleryPreviewDiv.innerHTML = previewHTML;
+      }).catch(err => {
+        galleryPreviewDiv.innerHTML = "<p>Could not load gallery preview.</p>";
+      });
+    }
   }
 
-  // Gallery
+  // Gallery Page: Full gallery and upload form
   if (document.getElementById('galleryFull')) {
-    let galleryHTML = '';
-    galleryImages.forEach(img => {
-      galleryHTML += `<div><img src="gallery/${img.file}" alt="${img.caption}"><br><small>${img.caption}</small></div>`;
-    });
-    document.getElementById('galleryFull').innerHTML = galleryHTML;
+    fetchGalleryImages();
 
-    // Upload form (local, not to GitHub but for preview)
-    document.getElementById('uploadForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const fileInput = document.getElementById('photoUpload');
-      const caption = document.getElementById('photoCaption').value;
-      const file = fileInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-          const imgURL = ev.target.result;
-          const div = document.createElement('div');
-          div.innerHTML = `<img src="${imgURL}" alt="${caption}"><br><small>${caption}</small>`;
-          document.getElementById('galleryFull').prepend(div);
-        };
-        reader.readAsDataURL(file);
-        fileInput.value = '';
-        document.getElementById('photoCaption').value = '';
-      }
-    });
+    // Upload form (local preview only)
+    if (document.getElementById('uploadForm')) {
+      document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('photoUpload');
+        const caption = document.getElementById('photoCaption').value;
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(ev) {
+            const imgURL = ev.target.result;
+            const div = document.createElement('div');
+            div.innerHTML = `<img src="${imgURL}" alt="${caption}"><br><small>${caption}</small>`;
+            document.getElementById('galleryFull').prepend(div);
+          };
+          reader.readAsDataURL(file);
+          fileInput.value = '';
+          document.getElementById('photoCaption').value = '';
+        }
+      });
+    }
   }
 
-  // Stats
+  // Stats page
   if (document.getElementById('statsTable')) {
     function renderStats() {
       const stats = getStats();
@@ -167,22 +181,24 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     renderStats();
 
-    document.getElementById('statsForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const player = document.getElementById('playerName').value;
-      const points = +document.getElementById('points').value;
-      const rebounds = +document.getElementById('rebounds').value;
-      const assists = +document.getElementById('assists').value;
-      const date = document.getElementById('gameDate').value;
-      const stats = getStats();
-      stats.push({ player, points, rebounds, assists, date });
-      saveStats(stats);
-      renderStats();
-      e.target.reset();
-    });
+    if (document.getElementById('statsForm')) {
+      document.getElementById('statsForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const player = document.getElementById('playerName').value;
+        const points = +document.getElementById('points').value;
+        const rebounds = +document.getElementById('rebounds').value;
+        const assists = +document.getElementById('assists').value;
+        const date = document.getElementById('gameDate').value;
+        const stats = getStats();
+        stats.push({ player, points, rebounds, assists, date });
+        saveStats(stats);
+        renderStats();
+        e.target.reset();
+      });
+    }
   }
 
-  // Calendar
+  // Calendar page
   if (document.getElementById('gameCalendar')) {
     let calHTML = `<table>
       <tr><th>Date</th><th>Opponent</th><th>Location</th><th>Result</th></tr>`;
@@ -198,8 +214,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('gameCalendar').innerHTML = calHTML;
   }
 
-  // Advice
-  if (document.getElementById('adviceResult')) {
+  // Advice page
+  if (document.getElementById('adviceResult') && document.getElementById('adviceForm')) {
     document.getElementById('adviceForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const topic = document.getElementById('adviceTopic').value;
@@ -207,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Plays
+  // Plays page
   if (document.getElementById('playsList')) {
     let playHTML = '';
     plays.forEach(p => {
