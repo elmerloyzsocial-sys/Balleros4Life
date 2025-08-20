@@ -1,6 +1,37 @@
-<h2>Game Photos</h2>
-<form id="uploadForm">
-  <input type="file" id="photoUpload" accept="image/*" />
-  <button type="submit">Upload</button>
-</form>
-<div id="photoGallery"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery - Ballero4Life</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Ballero4Life - Gallery</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="stats.html">Stats</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="advice.html">Coach Advice</a>
+      <a href="plays.html">Plays</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Game Photo Gallery</h2>
+    <div id="galleryFull"></div>
+    <h3>Upload Game Photo</h3>
+    <form id="uploadForm">
+      <input type="file" id="photoUpload" accept="image/*">
+      <input type="text" id="photoCaption" placeholder="Caption (optional)">
+      <button type="submit" class="btn">Upload</button>
+      <p style="font-size:0.9em;color:gray;">* To add permanent images, upload to your GitHub repo's <code>/gallery/</code> folder.</p>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2025 Ballero4Life</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
