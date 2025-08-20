@@ -1,63 +1,65 @@
-# 🏀 Ballero4Life
+# Balleros4Life Club Portal
 
-**Ballero4Life** is a mobile-friendly, interactive website designed to help basketball teams track their performance, manage player stats, share game photos, and strategize like pros. Built with HTML, CSS, and JavaScript, and hosted on GitHub Pages, it’s your all-in-one digital playbook.
+Welcome to the **Balleros4Life** website—a mobile-friendly portal for basketball club members, fans, and organizers! This site is designed for easy navigation and quick access to all club activities, resources, and information.
+
+## Features
+
+- **Events & Team Games Table:**  
+  View all upcoming and past matches, including results, scores, opponents, and venues in one easy-to-read table.
+
+- **YouTube Resources:**  
+  Organize and access curated basketball videos by category ("Offense", "Defense", "In-Play").  
+  Add your own YouTube links with titles, and remove them anytime—links are saved in your browser for convenience.
+
+- **Clickable Navigation Menu:**  
+  Clean, icon-based menu for accessing all sections:
+    - Next Game
+    - Gallery
+    - Player Stats
+    - Player Photos
+    - Advice
+    - Plays
+
+- **Player Stats & Photos:**  
+  Track individual player stats and upload player photos for easy reference.
+
+- **Gallery:**  
+  Preview and upload team and match photos.
+
+- **Advice & Plays:**  
+  Get basketball advice and view club playbooks.
+
+- **About & Contact Section:**  
+  Learn more about the club, and easily find contact info (email, Instagram, phone).
+
+## Mobile-Friendly Design
+
+- Responsive single-column layout, large tap targets, and scrollable tables.
+- Designed for fast loading and usability on phones and tablets.
+
+## How to Use
+
+- Open `index.html` in your browser.
+- Use the navigation menu to access each feature.
+- Add YouTube videos and photos—these are stored in your browser (localStorage) for privacy and speed.
+- All updates to events, resources, and stats are instant—no login required.
+
+## Customization
+
+- Easily adjust the club info, contact details, and icons in `index.html`.
+- Add new sections or pages as your club grows.
+
+## Getting Started
+
+1. Clone or download this repository.
+2. Open `index.html` in your browser.  
+3. (Optional) Deploy to GitHub Pages or your own web server for public access.
+
+## Contact
+
+For questions or suggestions, reach out to us at [contact@balleros4life.com](mailto:contact@balleros4life.com)  
+or DM [@balleros4life](https://instagram.com/balleros4life) on Instagram.
 
 ---
 
-## 🚀 Features
-
-- **🏠 Homepage**: Displays upcoming games, current team standings, and a preview of the photo gallery.
-- **📊 Player Stats**: Tracks individual player performance per game (points, assists, rebounds).
-- **📅 Game Calendar**: View past, present, and future games in a clean calendar layout.
-- **🖼️ Photo Gallery**: Upload and view game photos. Images are stored in the `images/` folder and served via GitHub.
-- **🧠 Coach Advice**: Offers strategic tips and improvement suggestions for the team.
-- **📘 Playbook**: Lists in-game plays that can be run during matches.
-
----
-
-## 📁 Project Structure
-
-Ballero4Life/ ├── index.html ├── stats.html ├── calendar.html ├── gallery.html ├── advice.html ├── plays.html ├── css/ │ └── style.css ├── js/ │ └── script.js ├── data/ │ ├── games.json │ ├── players.json │ ├── advice.json │ └── plays.json ├── images/ │ └── (game photos go here) ├── README.md
-
-
----
-
-## 🛠️ Setup Instructions
-
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/yourusername/Ballero4Life.git
-Add your game photos Place .jpg or .png files in the images/ folder. They’ll automatically appear in the gallery.
-
-Customize your data Update the JSON files in the data/ folder to reflect your team’s schedule, stats, advice, and plays.
-
-Deploy to GitHub Pages
-
-Go to your repo’s Settings > Pages
-
-Set source to main branch and /root
-
-Your site will be live at https://yourusername.github.io/Ballero4Life
-
-📱 Mobile Friendly
-The site is fully responsive and optimized for mobile devices, so you can check stats, view plays, and upload photos right from the court.
-
-💡 Future Enhancements
-Add authentication for team members
-
-Enable drag-and-drop photo uploads
-
-Integrate with Google Calendar or Firebase
-
-Add charts for player performance trends
-
-👏 Credits
-Created by [Your Name] Powered by HTML, CSS, JavaScript, and GitHub Pages
-
-📸 License
-This project is open-source under the MIT License. Feel free to fork, contribute, and customize for your own team!
-
-
----
-
-Want help generating a logo for Ballero4Life or setting up GitHub Actions for auto-deploy?
+**Balleros4Life**—where teamwork, fun, and growth are always in play!
