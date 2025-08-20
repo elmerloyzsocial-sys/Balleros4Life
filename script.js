@@ -356,4 +356,37 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     document.getElementById('playsList').innerHTML = playHTML;
   }
+
+  // ==== MANUAL PLAYER PHOTO DISPLAY ====
+// Add player info here. Image should be uploaded to images/players/
+const players = [
+  { name: "Sample Player", img: "images/players/sample_player.jpg" },
+  // Add more players below. Example:
+  // { name: "John Doe", img: "images/players/john_doe.jpg" },
+  // { name: "Jane Smith", img: "images/players/jane_smith.png" },
+];
+
+// Display player photos
+const playerPhotosDiv = document.getElementById("playerPhotos");
+playerPhotosDiv.innerHTML = ""; // Clear any previous content
+
+players.forEach(player => {
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <img src="${player.img}" alt="${player.name}">
+    <div>${player.name}</div>
+  `;
+  playerPhotosDiv.appendChild(div);
+});
+
+// Hide the upload form since we're using manual method
+const form = document.getElementById("playerPhotoForm");
+if (form) form.style.display = "none";
+
+// Optional: If you want to show a message instead of the form, uncomment below:
+// if (form) {
+//   form.insertAdjacentHTML("afterend",
+//     "<div style='color: #243d68; font-weight: 600; margin-bottom: 1em;'>Upload is disabled. Please add player images manually to <code>images/players/</code> and update <code>script.js</code>.</div>"
+//   );
+// }
 });
