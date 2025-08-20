@@ -50,7 +50,6 @@ async function fetchGalleryImages() {
 
 // Call the function to load gallery images
 fetchGalleryImages();
-];
 
 // Plays
 const plays = [
