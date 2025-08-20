@@ -2,31 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gallery - Balleros4Life</title>
+  <title>Standings - Balleros4Life</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <style>
     body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f7f7fa; }
     main { max-width: 400px; margin: auto; padding: 1em; }
-    section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin: 2em 0 1em 0; padding: 1em; border: 1px solid #e5e5e5;}
+    section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin: 2em 0 1em 0; padding: 1em; border: 1px solid #e5e5e5; }
     h1 { text-align: center; color: #243d68; }
     a { text-decoration: none; color: #243d68; font-weight: 600;}
     .back { margin-bottom: 1em; display: block;}
-    .galleryItem { display: inline-block; margin: 0.5em; vertical-align: top; text-align: center; }
-    .galleryImg { max-width: 120px; max-height: 120px; border: 2px solid #ddd; border-radius: 6px;}
   </style>
 </head>
 <body>
   <main>
     <a href="index.html" class="back">&larr; Home</a>
     <section>
-      <h1>Gallery</h1>
-      <div id="galleryFull"></div>
-      <form id="uploadForm">
-        <input type="file" id="photoUpload" accept="image/*" />
-        <input type="text" id="photoCaption" placeholder="Caption" />
-        <button type="submit">Upload</button>
-      </form>
+      <h1>Standings</h1>
+      <div id="standingsTable"></div>
     </section>
   </main>
   <script src="script.js"></script>
