@@ -1,6 +1,5 @@
 // Data simulation: replace with backend or localStorage in production
 
-// Games, Standings, and Gallery
 const games = [
   { date: '2025-08-22', opponent: 'Falcons', location: 'Home', result: null, ourScore: null, oppScore: null },
   { date: '2025-08-29', opponent: 'Eagles', location: 'Away', result: null, ourScore: null, oppScore: null },
@@ -15,7 +14,6 @@ const standings = [
   { team: 'Bulls', wins: 0, losses: 2 }
 ];
 
-// Plays
 const plays = [
   {
     name: "Pick and Roll",
@@ -35,7 +33,6 @@ const plays = [
   }
 ];
 
-// Advice
 const advice = {
   offense: "Move the ball quickly, look for open shots, and set effective screens. Avoid stagnant offense.",
   defense: "Communicate, switch on screens if needed, and always box out after a shot. Defense wins games!",
@@ -52,12 +49,19 @@ function saveStats(stats) {
   localStorage.setItem('playerStats', JSON.stringify(stats));
 }
 
+// Player Photos (simulate with localStorage for persistence)
+function getPlayerPhotos() {
+  return JSON.parse(localStorage.getItem('playerPhotos') || '{}');
+}
+function savePlayerPhotos(photos) {
+  localStorage.setItem('playerPhotos', JSON.stringify(photos));
+}
+
 // Gallery fetch from GitHub
 const repoOwner = "elmerloyzsocial-sys";
 const repoName = "Balleros4Life";
 const galleryFolder = "gallery";
 
-// Fetch images from GitHub /gallery/ folder and display in galleryFull
 async function fetchGalleryImages() {
   const galleryDiv = document.getElementById("galleryFull");
   if (!galleryDiv) return;
@@ -87,7 +91,7 @@ async function fetchGalleryImages() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Home page: Upcoming game, Standings, Gallery preview
+  // Home page: Next Game, Standings, Team Stats, Gallery Preview
   if (document.getElementById('nextGame')) {
     // Upcoming game
     const upcoming = games
@@ -194,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
           reader.onload = function(ev) {
             const imgURL = ev.target.result;
             const div = document.createElement('div');
-            div.innerHTML = `<img src="${imgURL}" alt="${caption}"><br><small>${caption}</small>`;
+            div.innerHTML = `<img src="${imgURL}" alt="${caption}" class="galleryImg"><br><small>${caption}</small>`;
             document.getElementById('galleryFull').prepend(div);
           };
           reader.readAsDataURL(file);
@@ -205,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Stats page
+  // Stats page (global stats table)
   if (document.getElementById('statsTable')) {
     function renderStats() {
       const stats = getStats();
@@ -241,9 +245,82 @@ document.addEventListener("DOMContentLoaded", function() {
         stats.push({ player, points, rebounds, assists, date });
         saveStats(stats);
         renderStats();
+        renderPlayerStats(); // Also update player tables/photos
         e.target.reset();
       });
     }
+  }
+
+  // Player Photo upload form
+  if (document.getElementById('playerPhotoForm')) {
+    document.getElementById('playerPhotoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('photoPlayerName').value.trim();
+      const file = document.getElementById('playerPhotoUpload').files[0];
+      if (name && file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const photos = getPlayerPhotos();
+          photos[name] = ev.target.result;
+          savePlayerPhotos(photos);
+          renderPlayerPhotosAndStats();
+        };
+        reader.readAsDataURL(file);
+        e.target.reset();
+      }
+    });
+  }
+
+  // Render player photos and separate stats tables
+  function renderPlayerPhotosAndStats() {
+    const stats = getStats();
+    const photos = getPlayerPhotos();
+    const players = [...new Set(stats.map(s => s.player))];
+    const photoDiv = document.getElementById('playerPhotos');
+    const tablesDiv = document.getElementById('playerStatsTables');
+
+    // Photos
+    photoDiv.innerHTML = players.length 
+      ? players.map(name => {
+          const imgSrc = photos[name] || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=243d68&color=fff&size=128";
+          return `<div>
+            <img src="${imgSrc}" alt="${name}">
+            <div style="font-weight:600;">${name}</div>
+          </div>`;
+        }).join('')
+      : "<i>No player photos yet.</i>";
+
+    // Stats Tables
+    tablesDiv.innerHTML = players.length
+      ? players.map(name => {
+          const playerStats = stats.filter(s => s.player === name);
+          if (!playerStats.length) return '';
+          let statsHTML = `<table>
+            <caption>${name}'s Stats</caption>
+            <tr><th>Date</th><th>Points</th><th>Rebounds</th><th>Assists</th></tr>`;
+          playerStats.forEach(s => {
+            statsHTML += `<tr>
+              <td>${s.date}</td>
+              <td>${s.points}</td>
+              <td>${s.rebounds}</td>
+              <td>${s.assists}</td>
+            </tr>`;
+          });
+          statsHTML += `</table>`;
+          return statsHTML;
+        }).join('<br>')
+      : "<i>No player stats yet.</i>";
+  }
+  function renderPlayerPhotos() {
+    renderPlayerPhotosAndStats();
+  }
+  function renderPlayerStats() {
+    renderPlayerPhotosAndStats();
+  }
+
+  // Initial render on page load
+  if (document.getElementById('playerPhotos') && document.getElementById('playerStatsTables')) {
+    renderPlayerPhotosAndStats();
   }
 
   // Calendar page
