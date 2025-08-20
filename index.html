@@ -140,6 +140,37 @@
     /* Make tables horizontally scrollable on small screens */
     .responsive-table { overflow-x: auto; }
     .responsive-table table { min-width: 400px; }
+    /* Player photo grid */
+    #playerPhotos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-bottom: 1em;
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+    #playerPhotos > div {
+      text-align: center;
+      width: 80px;
+      min-width: 80px;
+    }
+    #playerPhotos img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      margin-bottom: 0.3em;
+    }
+    caption {
+      font-weight: 600;
+      color: #243d68;
+      background: #f0f0f5;
+      text-align: left;
+      padding: 0.2em 0.5em;
+      border-radius: 4px 4px 0 0;
+      margin-bottom: 0.1em;
+    }
   </style>
 </head>
 <body>
@@ -177,30 +208,30 @@
       </form>
     </section>
 
-   <section>
-  <h2>Player Photos & Stats</h2>
-  <form id="playerPhotoForm">
-    <input type="text" id="photoPlayerName" placeholder="Player Name" required />
-    <input type="file" id="playerPhotoUpload" accept="image/*" required />
-    <button type="submit">Upload Photo</button>
-  </form>
-  <div id="playerPhotos"></div>
-  <div id="playerStatsTables"></div>
-   </section>
+    <section>
+      <h2>Player Stats</h2>
+      <div id="statsTable" class="responsive-table"></div>
+      <form id="statsForm">
+        <input type="text" id="playerName" placeholder="Player Name" required />
+        <input type="number" id="points" placeholder="Points" required />
+        <input type="number" id="rebounds" placeholder="Rebounds" required />
+        <input type="number" id="assists" placeholder="Assists" required />
+        <input type="date" id="gameDate" required />
+        <button type="submit">Add Stats</button>
+      </form>
+    </section>
 
     <section>
-    <h2>Player Stats</h2>
-    <div id="statsTable"></div>
-    <form id="statsForm">
-      <input type="text" id="playerName" placeholder="Player Name" required />
-      <input type="number" id="points" placeholder="Points" required />
-      <input type="number" id="rebounds" placeholder="Rebounds" required />
-      <input type="number" id="assists" placeholder="Assists" required />
-      <input type="date" id="gameDate" required />
-      <button type="submit">Add Stats</button>
-    </form>
+      <h2>Player Photos & Individual Stats</h2>
+      <form id="playerPhotoForm">
+        <input type="text" id="photoPlayerName" placeholder="Player Name" required />
+        <input type="file" id="playerPhotoUpload" accept="image/*" required />
+        <button type="submit">Upload Photo</button>
+      </form>
+      <div id="playerPhotos"></div>
+      <div id="playerStatsTables"></div>
     </section>
-    
+
     <section>
       <h2>Game Calendar</h2>
       <div id="gameCalendar" class="responsive-table"></div>
