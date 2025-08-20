@@ -1,0 +1,118 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: #f8fafc;
+  color: #222;
+}
+header {
+  background: #263238;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2em;
+}
+nav {
+  margin-bottom: 0.5em;
+}
+nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  margin: 0 0.5em;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #fbc02d;
+}
+main {
+  max-width: 700px;
+  margin: 2em auto;
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+section {
+  margin-bottom: 2em;
+}
+footer {
+  text-align: center;
+  padding: 1em 0;
+  background: #e3e3e3;
+  color: #222;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+}
+.btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.7em 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 1em;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: #1565c0;
+}
+input, select {
+  padding: 0.6em;
+  margin: 0.4em 0;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  width: 100%;
+  box-sizing: border-box;
+}
+form {
+  margin-bottom: 1.5em;
+}
+#galleryPreview img, #galleryFull img {
+  max-width: 150px;
+  max-height: 120px;
+  border-radius: 6px;
+  margin: 0.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#galleryFull {
+  display: flex;
+  flex-wrap: wrap;
+}
+#galleryPreview {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1em;
+  }
+  nav {
+    display: block;
+    margin-bottom: 1em;
+  }
+  nav a {
+    display: inline-block;
+    margin: 0.3em 0.7em;
+  }
+  #galleryPreview img, #galleryFull img {
+    max-width: 95px;
+    max-height: 80px;
+  }
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.7em 0;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: center;
+}
+th {
+  background: #fbc02d;
+  color: #222;
+}
