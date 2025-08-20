@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ballero4Life</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <title>Ballero4Life Basketball Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Ballero4Life 🏀</h1>
-    <nav>
-      <a href="calendar.html">Calendar</a>
-      <a href="stats.html">Player Stats</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="advice.html">Coach Advice</a>
-      <a href="plays.html">In-Game Plays</a>
+  <header class="navbar">
+    <h1>🏀 Ballero4Life</h1>
+    <button class="menu-toggle" onclick="toggleNav()">☰</button>
+    <nav id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+	  <a href="teamstat.html">Teamstats</a>
+      <a href="stats.html">PlayerStats</a>
+      <a href="coaching.html">Coaching</a>
+      <a href="plays.html">Plays</a>
+      <a href="photos.html">Photos</a>
+      <a href="events.html">Events</a>
+      <a href="entertainment.html">Fun</a>
     </nav>
   </header>
-
   <main>
-    <section id="upcoming-game">
-      <h2>Upcoming Game</h2>
-      <div id="nextGame"></div>
+    <section class="card">
+      <h2>Welcome!</h2>
+      <p>Get the latest on our games, teamstats,player stats, and more!</p>
+      <div id="latest-news"></div>
     </section>
-
-    <section id="team-standing">
-      <h2>Team Standing</h2>
-      <div id="standings"></div>
+    <section class="quick-actions">
+      <h3>Quick Add</h3>
+      <button onclick="openModal('event')">Add Event</button>
+      <button onclick="openModal('advice')">Add Advice</button>
+      <button onclick="openModal('photo')">Add Photo</button>
+      <button onclick="openModal('play')">Add Play</button>
+      <button onclick="openModal('stat')">Add Stat</button>
+	  <button onclick="openModal('teamstat')">Add TeamStat</button>
     </section>
-
-    <section id="gallery-preview">
-      <h2>Game Gallery</h2>
-      <div id="gallery"></div>
-    </section>
+    <div id="modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="addForm"></form>
+      </div>
+    </div>
   </main>
-
-  <script src="js/script.js"></script>
+  <footer>
+    <p>&copy; 2025 Ballero4Life Basketball </p>
+  </footer>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Show next event
+    function showLatestNews() {
+      let events = [];
+      try {
+        events = JSON.parse(localStorage.getItem('events') || '[]');
+      } catch {}
+      if (!events.length) {
+        fetch('data/events.json').then(r=>r.json()).then(data=>{
+          let e = data.events[0];
+          document.getElementById('latest-news').innerHTML =
+            `<h3>Next Event:</h3><p>${e.title} - ${e.date}</p>`;
+        });
+      } else {
+        let e = events[0];
+        document.getElementById('latest-news').innerHTML =
+          `<h3>Next Event:</h3><p>${e.title} - ${e.date}</p>`;
+      }
+    }
+    showLatestNews();
+  </script>
 </body>
 </html>

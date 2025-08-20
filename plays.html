@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basketball In-Game Plays</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <h1>Basketball In-Game Plays</h1>
+    <button class="menu-toggle" onclick="toggleNav()">☰</button>
+    <nav id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="stats.html">Stats</a>
+      <a href="coaching.html">Coaching</a>
+      <a href="plays.html">Plays</a>
+      <a href="photos.html">Photos</a>
+      <a href="events.html">Events</a>
+      <a href="entertainment.html">Fun</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card">
+      <h2>Featured Plays</h2>
+      <button class="add-btn" onclick="openModal('play')">Add Play</button>
+      <ul id="play-list"></ul>
+    </section>
+    <div id="modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="addForm"></form>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 HoopStars Basketball Team</p>
+  </footer>
+  <script src="assets/js/main.js"></script>
+  <script>
+    function loadPlays() {
+      let plays = [];
+      try {
+        plays = JSON.parse(localStorage.getItem('plays') || '[]');
+      } catch {}
+      fetch('data/plays.json').then(r=>r.json()).then(data=>{
+        let allPlays = [...plays, ...data.plays];
+        document.getElementById('play-list').innerHTML =
+          allPlays.map(p=>`<li><strong>${p.name}:</strong> ${p.description}</li>`).join('');
+      });
+    }
+    loadPlays();
+  </script>
+</body>
+</html>
