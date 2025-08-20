@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player Stats - Balleros4Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f7f7fa; }
+    main { max-width: 400px; margin: auto; padding: 1em; }
+    section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin: 2em 0 1em 0; padding: 1em; border: 1px solid #e5e5e5;}
+    h1 { text-align: center; color: #243d68; }
+    a { text-decoration: none; color: #243d68; font-weight: 600;}
+    .back { margin-bottom: 1em; display: block;}
+    .responsive-table { overflow-x: auto; }
+    .responsive-table table { min-width: 320px; }
+    form { margin-bottom: 1em; display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center;}
+    input, button { font-size: 1em; padding: 0.45em 0.6em; border: 1px solid #e5e5e5; border-radius: 4px; flex: 1 1 110px;}
+    button { background: #f7b32b; color: #222; font-weight: 600; border: none; min-width: 90px; flex: 1 1 90px; }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html" class="back">&larr; Home</a>
+    <section>
+      <h1>Player Stats</h1>
+      <div id="statsTable" class="responsive-table"></div>
+      <form id="statsForm">
+        <input type="text" id="playerName" placeholder="Player Name" required />
+        <input type="number" id="points" placeholder="Points" required />
+        <input type="number" id="rebounds" placeholder="Rebounds" required />
+        <input type="number" id="assists" placeholder="Assists" required />
+        <input type="date" id="gameDate" required />
+        <button type="submit">Add Stats</button>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
