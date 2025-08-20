@@ -2,10 +2,10 @@
 
 // Games, Standings, and Gallery
 const games = [
-  { date: '2025-08-22', opponent: 'Falcons', location: 'Home', result: null },
-  { date: '2025-08-29', opponent: 'Eagles', location: 'Away', result: null },
-  { date: '2025-08-15', opponent: 'Bulls', location: 'Away', result: 'Win' },
-  { date: '2025-08-08', opponent: 'Sharks', location: 'Home', result: 'Loss' }
+  { date: '2025-08-22', opponent: 'Falcons', location: 'Home', result: null, ourScore: null, oppScore: null },
+  { date: '2025-08-29', opponent: 'Eagles', location: 'Away', result: null, ourScore: null, oppScore: null },
+  { date: '2025-08-15', opponent: 'Bulls', location: 'Away', result: 'Win', ourScore: 88, oppScore: 75 },
+  { date: '2025-08-08', opponent: 'Sharks', location: 'Home', result: 'Loss', ourScore: 65, oppScore: 70 }
 ];
 
 const standings = [
@@ -105,6 +105,29 @@ document.addEventListener("DOMContentLoaded", function() {
     standingsHTML += `</table>`;
     document.getElementById('standingsTable').innerHTML = standingsHTML;
 
+    // Team Stats Table
+    let teamStatsHTML = `<table>
+      <tr>
+        <th>Date</th>
+        <th>Opponent</th>
+        <th>Location</th>
+        <th>Our Score</th>
+        <th>Opponent Score</th>
+        <th>Result</th>
+      </tr>`;
+    games.forEach(g => {
+      teamStatsHTML += `<tr>
+        <td>${g.date}</td>
+        <td>${g.opponent}</td>
+        <td>${g.location}</td>
+        <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
+        <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
+        <td>${g.result ? g.result : 'Upcoming'}</td>
+      </tr>`;
+    });
+    teamStatsHTML += `</table>`;
+    document.getElementById('teamStatsTable').innerHTML = teamStatsHTML;
+
     // Gallery preview (uses GitHub API, shows first 3 images)
     const galleryPreviewDiv = document.getElementById('galleryPreview');
     if (galleryPreviewDiv) {
@@ -128,6 +151,31 @@ document.addEventListener("DOMContentLoaded", function() {
         galleryPreviewDiv.innerHTML = "<p>Could not load gallery preview.</p>";
       });
     }
+  }
+
+  // Team Stats Table (if on separate page/section)
+  if (document.getElementById('teamStatsTable') && !document.getElementById('nextGame')) {
+    let teamStatsHTML = `<table>
+      <tr>
+        <th>Date</th>
+        <th>Opponent</th>
+        <th>Location</th>
+        <th>Our Score</th>
+        <th>Opponent Score</th>
+        <th>Result</th>
+      </tr>`;
+    games.forEach(g => {
+      teamStatsHTML += `<tr>
+        <td>${g.date}</td>
+        <td>${g.opponent}</td>
+        <td>${g.location}</td>
+        <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
+        <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
+        <td>${g.result ? g.result : 'Upcoming'}</td>
+      </tr>`;
+    });
+    teamStatsHTML += `</table>`;
+    document.getElementById('teamStatsTable').innerHTML = teamStatsHTML;
   }
 
   // Gallery Page: Full gallery and upload form
