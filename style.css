@@ -127,3 +127,12 @@ th {
   border-radius: 8px;
   box-shadow: 2px 2px 12px #aaa;
 }
+.player-photo {
+  max-width: 100px;   /* or whatever logo size you prefer */
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 10px auto;  /* centers the image, optional */
+  border-radius: 8px; /* optional: rounded corners for a logo look */
+}
