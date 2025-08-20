@@ -361,6 +361,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Add player info here. Image should be uploaded to images/players/
 const players = [
   { name: "Loyz", img: "images/players/Loyz.jpg" },
+  { name: "Jerwin", img: "images/players/Jerwin.jpg" },
   // Add more players below. Example:
   // { name: "John Doe", img: "images/players/john_doe.jpg" },
   // { name: "Jane Smith", img: "images/players/jane_smith.png" },
