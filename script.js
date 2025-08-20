@@ -368,7 +368,7 @@ const players = [
 
 // Display player photos
 const playerPhotosDiv = document.getElementById("playerPhotos");
-playerPhotosDiv.innerHTML = ""; // Clear any previous content
+if (playerPhotosDiv) playerPhotosDiv.innerHTML = ""; // Clear any previous content
 
 players.forEach(player => {
   const div = document.createElement("div");
