@@ -12,10 +12,10 @@
       --card: #fff;
       --border: #e5e5e5;
     }
-    body { 
-      font-family: 'Segoe UI', Arial, sans-serif; 
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      background: var(--bg); 
+      background: var(--bg);
       color: #222;
     }
     header {
@@ -23,153 +23,65 @@
       color: #fff;
       padding: 1.2em 1em;
       text-align: center;
+      font-size: 1.3em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     main {
-      max-width: 600px;
+      max-width: 400px;
       margin: auto;
       padding: 1em;
+      margin-top: 2em;
     }
-    section {
-      background: var(--card);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      margin-bottom: 1em;
-      padding: 1em;
-      border: 1px solid var(--border);
-    }
-    h1, h2 {
-      font-weight: 600;
-      letter-spacing: -1px;
-    }
-    h2 {
-      font-size: 1.2em;
-      margin-top: 0;
-      margin-bottom: 0.7em;
-      color: var(--primary);
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-bottom: 1em;
-      font-size: 1em;
-    }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px 6px;
-      text-align: left;
-    }
-    th {
-      background: #f0f0f5;
-      font-weight: 600;
-    }
-
-    /* Gallery Styles */
-    .galleryItem {
-      display: inline-block;
-      margin: 0.5em;
-      vertical-align: top;
-      text-align: center;
-    }
-    .galleryImg {
-      max-width: 120px;
-      max-height: 120px;
-      border: 2px solid #ddd;
-      border-radius: 6px;
-    }
-    #galleryPreview {
+    .menu-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7em;
-    }
-    #galleryPreview div {
-      flex: 1 1 90px;
-      text-align: center;
-    }
-    #galleryPreview img {
-      max-width: 80px;
-      max-height: 80px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    ul { padding-left: 1.5em; margin: 0.5em 0; }
-    .advice {
-      background: #e6f2ff;
-      padding: 8px;
-      border-radius: 5px;
+      gap: 1.2em;
+      justify-content: center;
       margin-top: 0.5em;
     }
-    form {
-      margin-bottom: 1em;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5em;
-      align-items: center;
-    }
-    input, select, button {
-      font-size: 1em;
-      padding: 0.45em 0.6em;
+    .menu-card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 1.2em 0.8em;
+      min-width: 120px;
+      max-width: 160px;
+      flex: 1 1 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      margin: 0.1em 0;
-      min-width: 0;
-      flex: 1 1 120px;
-    }
-    button {
-      background: var(--accent);
-      color: #222;
-      font-weight: 600;
-      border: none;
+      text-align: center;
+      transition: box-shadow 0.15s, transform 0.15s;
       cursor: pointer;
-      min-width: 90px;
-      flex: 1 1 90px;
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.13em;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      position: relative;
     }
-    button:hover {
-      background: #ffd97a;
+    .menu-card:active,
+    .menu-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-2px) scale(1.03);
+      background: #f9f9fc;
     }
-    @media (max-width: 700px) {
-      main { max-width: 98vw; padding: 0.5em; }
-      section { padding: 0.8em; }
+    .menu-card span {
+      font-size: 2em;
+      display: block;
+      margin-bottom: 0.35em;
+      color: var(--accent);
     }
     @media (max-width: 480px) {
-      th, td { font-size: 0.95em; padding: 5px 3px; }
-      h2 { font-size: 1.05em; }
-      .galleryImg, #galleryPreview img { max-width: 60px; max-height: 60px; }
-      input, select, button { font-size: 0.98em; padding: 0.4em 0.38em; }
-      button { min-width: 70px; }
+      main { max-width: 99vw; padding: 0.5em; }
+      .menu-card { font-size: 1em; min-width: 100px; max-width: 120px; padding: 1em 0.5em; }
+      .menu-card span { font-size: 1.35em; }
+      header { font-size: 1.13em; }
+      .menu-grid { gap: 0.7em; }
     }
-    /* Make tables horizontally scrollable on small screens */
-    .responsive-table { overflow-x: auto; }
-    .responsive-table table { min-width: 400px; }
-    /* Player photo grid */
-    #playerPhotos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1em;
-      margin-bottom: 1em;
-      justify-content: flex-start;
-      align-items: flex-end;
-    }
-    #playerPhotos > div {
+    footer {
       text-align: center;
-      width: 80px;
-      min-width: 80px;
-    }
-    #playerPhotos img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #ddd;
-      margin-bottom: 0.3em;
-    }
-    caption {
-      font-weight: 600;
-      color: #243d68;
-      background: #f0f0f5;
-      text-align: left;
-      padding: 0.2em 0.5em;
-      border-radius: 4px 4px 0 0;
-      margin-bottom: 0.1em;
+      font-size: 0.93em;
+      color: #999;
+      margin: 2em 0 1em 0;
     }
   </style>
 </head>
@@ -178,85 +90,47 @@
     <h1>Balleros4Life</h1>
   </header>
   <main>
-    <section>
-      <h2>Next Game</h2>
-      <div id="nextGame"></div>
-    </section>
-
-    <section>
-      <h2>Standings</h2>
-      <div id="standingsTable" class="responsive-table"></div>
-    </section>
-
-    <section>
-      <h2>Team Stats</h2>
-      <div id="teamStatsTable" class="responsive-table"></div>
-    </section>
-
-    <section>
-      <h2>Gallery Preview</h2>
-      <div id="galleryPreview"></div>
-    </section>
-
-    <section>
-      <h2>Full Gallery</h2>
-      <div id="galleryFull"></div>
-      <form id="uploadForm">
-        <input type="file" id="photoUpload" accept="image/*" />
-        <input type="text" id="photoCaption" placeholder="Caption" />
-        <button type="submit">Upload</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Player Stats</h2>
-      <div id="statsTable" class="responsive-table"></div>
-      <form id="statsForm">
-        <input type="text" id="playerName" placeholder="Player Name" required />
-        <input type="number" id="points" placeholder="Points" required />
-        <input type="number" id="rebounds" placeholder="Rebounds" required />
-        <input type="number" id="assists" placeholder="Assists" required />
-        <input type="date" id="gameDate" required />
-        <button type="submit">Add Stats</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Player Photos & Individual Stats</h2>
-      <form id="playerPhotoForm">
-        <input type="text" id="photoPlayerName" placeholder="Player Name" required />
-        <input type="file" id="playerPhotoUpload" accept="image/*" required />
-        <button type="submit">Upload Photo</button>
-      </form>
-      <div id="playerPhotos"></div>
-      <div id="playerStatsTables"></div>
-    </section>
-
-    <section>
-      <h2>Game Calendar</h2>
-      <div id="gameCalendar" class="responsive-table"></div>
-    </section>
-
-    <section>
-      <h2>Advice</h2>
-      <form id="adviceForm">
-        <select id="adviceTopic">
-          <option value="offense">Offense</option>
-          <option value="defense">Defense</option>
-          <option value="teamwork">Teamwork</option>
-          <option value="conditioning">Conditioning</option>
-          <option value="shooting">Shooting</option>
-        </select>
-        <button type="submit">Get Advice</button>
-      </form>
-      <div id="adviceResult"></div>
-    </section>
-
-    <section>
-      <h2>Plays</h2>
-      <ul id="playsList"></ul>
-    </section>
+    <nav class="menu-grid">
+      <a class="menu-card" href="nextgame.html">
+        <span>🏀</span>
+        Next Game
+      </a>
+      <a class="menu-card" href="standings.html">
+        <span>📊</span>
+        Standings
+      </a>
+      <a class="menu-card" href="teamstats.html">
+        <span>🥇</span>
+        Team Stats
+      </a>
+      <a class="menu-card" href="gallery.html">
+        <span>🖼️</span>
+        Gallery
+      </a>
+      <a class="menu-card" href="playerstats.html">
+        <span>👤</span>
+        Player Stats
+      </a>
+      <a class="menu-card" href="photos.html">
+        <span>🤳</span>
+        Player Photos
+      </a>
+      <a class="menu-card" href="calendar.html">
+        <span>📅</span>
+        Game Calendar
+      </a>
+      <a class="menu-card" href="advice.html">
+        <span>💡</span>
+        Advice
+      </a>
+      <a class="menu-card" href="plays.html">
+        <span>📖</span>
+        Plays
+      </a>
+    </nav>
   </main>
-  <script src="script.js"></script>
+  <footer>
+    &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
+  </footer>
 </body>
 </html>
