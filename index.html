@@ -177,18 +177,16 @@
       </form>
     </section>
 
-    <section>
-      <h2>Player Stats</h2>
-      <div id="statsTable" class="responsive-table"></div>
-      <form id="statsForm">
-        <input type="text" id="playerName" placeholder="Player Name" required />
-        <input type="number" id="points" placeholder="Points" required />
-        <input type="number" id="rebounds" placeholder="Rebounds" required />
-        <input type="number" id="assists" placeholder="Assists" required />
-        <input type="date" id="gameDate" required />
-        <button type="submit">Add Stats</button>
-      </form>
-    </section>
+   <section>
+  <h2>Player Photos & Stats</h2>
+  <form id="playerPhotoForm">
+    <input type="text" id="photoPlayerName" placeholder="Player Name" required />
+    <input type="file" id="playerPhotoUpload" accept="image/*" required />
+    <button type="submit">Upload Photo</button>
+  </form>
+  <div id="playerPhotos"></div>
+  <div id="playerStatsTables"></div>
+   </section>
 
     <section>
       <h2>Game Calendar</h2>
