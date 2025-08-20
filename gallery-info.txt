@@ -1,1 +1,47 @@
-📸 Save images in the images/ folder and reference them in gallery.html. GitHub will host them automatically. 
+Overview
+This is an HTML file for a Basketball-themed website called Ballero4Life. The main purpose of this page is to serve as a photo gallery where users can view and upload game photos.
+
+Breakdown
+1. Document Setup
+<!DOCTYPE html>: Declares this as an HTML5 document.
+<html lang="en">: Root element with English as the language.
+2. Head Section
+Meta Tags:
+charset="UTF-8": Ensures proper character encoding.
+viewport: Makes the page responsive on mobile devices.
+Title: Sets browser tab title to "Gallery - Ballero4Life".
+Stylesheet Link: Imports styles from style.css.
+3. Body Section
+Header
+Site Title: <h1>Ballero4Life - Gallery</h1>
+Navigation Bar: Links to other pages of the site:
+Home, Gallery (current), Stats, Calendar, Coach Advice, Plays
+Main Content
+Gallery Title: <h2>Game Photo Gallery</h2>
+
+Gallery Display Area: <div id="galleryFull"></div>
+
+This is where images will be shown—likely populated by JavaScript.
+Photo Upload Form:
+
+File Input: For uploading an image (accept="image/*" restricts to images).
+Caption Input: Optional text input for a photo caption.
+Submit Button: Uploads the photo.
+Note: Informs users that permanent images should be added to the GitHub repo’s /gallery/ folder.
+Footer
+Copyright
+4. Scripts
+script.js: JavaScript file that likely handles:
+Displaying images in the gallery.
+Uploading new images and adding captions.
+Handling form submission.
+How It Works (User Experience):
+You can explore other sections via the navigation bar.
+The gallery displays uploaded game photos.
+You can upload a new photo and add an optional caption using the form.
+Instructions indicate that permanent gallery images should be uploaded directly to the GitHub repo (for persistent storage).
+Key Points
+The gallery shows photos dynamically (likely using JavaScript).
+Uploaded photos may not be persistent unless added to the GitHub repo.
+Clean, simple structure and navigation.
+Mobile-friendly design (via viewport meta tag).
