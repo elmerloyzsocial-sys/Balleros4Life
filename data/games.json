@@ -1,17 +1,7 @@
 {
-  "upcoming": {
-    "opponent": "Sydney Slam",
-    "date": "2025-08-23",
-    "location": "Home Court"
-  },
-  "standing": {
-    "wins": 8,
-    "losses": 3
-  },
-  "calendar": [
-    { "date": "2025-08-01", "opponent": "Melbourne Blaze", "result": "Win 78-65" },
-    { "date": "2025-08-08", "opponent": "Brisbane Storm", "result": "Loss 72-75" },
-    { "date": "2025-08-15", "opponent": "Perth Pulse", "result": "Win 81-70" },
-    { "date": "2025-08-23", "opponent": "Sydney Slam", "result": "Upcoming" }
+  "games": [
+    {"date": "2025-08-20", "opponent": "Falcons", "location": "Home", "time": "7:00 PM"},
+    {"date": "2025-08-25", "opponent": "Chargers", "location": "Away", "time": "6:30 PM"},
+    {"date": "2025-09-01", "opponent": "Raptors", "location": "Home", "time": "8:00 PM"}
   ]
 }

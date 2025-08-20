@@ -1,74 +1,9 @@
-[
-  {
-    "name": "Louise V",
-    "points": 22,
-    "assists": 5,
-    "rebounds": 8
-  },
-  {
-    "name": "Jerwin T",
-    "points": 15,
-    "assists": 7,
-    "rebounds": 4
-  },
-  {
-    "name": "Jay Jose",
-    "points": 10,
-    "assists": 3,
-    "rebounds": 10
-  },
-  {
-    "name": "Elvis K",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  }
-   {
-    "name": "Bryan S",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Rey R",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Dee S",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Jordan ",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Christian Lloyd",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Paolo S",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Dan",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  } 
-  {
-    "name": "Albert T",
-    "points": 8,
-    "assists": 2,
-    "rebounds": 6
-  }
-]
+{
+  "win": 12,
+  "loss": 3,
+  "players": [
+    {"name": "John Doe", "points": 22, "rebounds": 8, "assists": 5},
+    {"name": "Sam Lee", "points": 18, "rebounds": 10, "assists": 7},
+    {"name": "Alex Kim", "points": 15, "rebounds": 5, "assists": 9}
+  ]
+}
