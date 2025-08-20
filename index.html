@@ -32,6 +32,51 @@
       padding: 1em;
       margin-top: 2em;
     }
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2em;
+      justify-content: center;
+      margin-bottom: 1.5em;
+    }
+    .menu-card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 1.2em 0.8em;
+      min-width: 120px;
+      max-width: 160px;
+      flex: 1 1 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: box-shadow 0.15s, transform 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.13em;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      position: relative;
+      margin-bottom: 0.5em;
+    }
+    .menu-card:active,
+    .menu-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-2px) scale(1.03);
+      background: #f9f9fc;
+    }
+    .menu-card span {
+      font-size: 2em;
+      display: block;
+      margin-bottom: 0.35em;
+      color: var(--accent);
+    }
+    @media (max-width: 480px) {
+      main { max-width: 99vw; padding: 0.5em; }
+      .menu-card { font-size: 1em; min-width: 100px; max-width: 120px; padding: 1em 0.5em; }
+      .menu-card span { font-size: 1.35em; }
+      .menu-grid { gap: 0.7em; }
+    }
     section {
       background: var(--card);
       border-radius: 10px;
@@ -141,7 +186,6 @@
     .about-contact p, .about-contact ul { margin-top: 0.3em; font-size: 0.97em; }
     .about-contact ul { padding-left: 1.2em; }
     @media (max-width: 480px) {
-      main { max-width: 99vw; padding: 0.5em; }
       section { padding: 0.6em; }
       th, td { font-size: 0.95em; padding: 5px 3px; }
       h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
@@ -159,18 +203,10 @@
     <h1>Balleros4Life</h1>
   </header>
   <main>
-     <nav class="menu-grid">
+    <nav class="menu-grid">
       <a class="menu-card" href="nextgame.html">
         <span>🏀</span>
         Next Game
-      </a>
-      <a class="menu-card" href="standings.html">
-        <span>📊</span>
-        Standings
-      </a>
-      <a class="menu-card" href="teamstats.html">
-        <span>🥇</span>
-        Team Stats
       </a>
       <a class="menu-card" href="gallery.html">
         <span>🖼️</span>
@@ -183,10 +219,6 @@
       <a class="menu-card" href="photos.html">
         <span>🤳</span>
         Player Photos
-      </a>
-      <a class="menu-card" href="calendar.html">
-        <span>📅</span>
-        Game Calendar
       </a>
       <a class="menu-card" href="advice.html">
         <span>💡</span>
