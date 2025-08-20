@@ -2,181 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Team Stats</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Stats - Ballero4Life</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="navbar">
-    <h1>Team Stats</h1>
-    <button class="menu-toggle" onclick="toggleNav()">☰</button>
-    <nav id="main-nav">
+  <header>
+    <h1>Ballero4Life - Player Stats</h1>
+    <nav>
       <a href="index.html">Home</a>
-      <a href="schedule.html">Schedule</a>
+      <a href="gallery.html">Gallery</a>
       <a href="stats.html">Stats</a>
-      <a href="coaching.html">Coaching</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="advice.html">Coach Advice</a>
       <a href="plays.html">Plays</a>
-      <a href="photos.html">Photos</a>
-      <a href="events.html">Events</a>
-      <a href="entertainment.html">Fun</a>
     </nav>
   </header>
   <main>
-    <section class="card">
-      <div id="game-info">
-        <label>
-          Team Name:
-          <input type="text" id="team-name" value="" />
-        </label>
-        <label>
-          Opponent Name:
-          <input type="text" id="opponent-name" value="" />
-        </label>
-        <label>
-          Game Date:
-          <input type="date" id="game-date" value="" />
-        </label>
-        <button onclick="saveGameInfo()">Save</button>
-      </div>
-      <h2>Win-Loss Record</h2>
-      <div id="win-loss"></div>
-      <h2>Player Stats Per Game</h2>
-      <button class="add-btn" onclick="openModal('stat')">Add Stat</button>
-      <table id="player-stats">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Points</th>
-            <th>Rebounds</th>
-            <th>Assists</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-    <div id="modal" class="modal" style="display:none;">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <form id="addForm">
-          <label>
-            Player Name: <input type="text" name="name" required>
-          </label><br>
-          <label>
-            Points: <input type="number" name="points" required>
-          </label><br>
-          <label>
-            Rebounds: <input type="number" name="rebounds" required>
-          </label><br>
-          <label>
-            Assists: <input type="number" name="assists" required>
-          </label><br>
-          <label>
-            Date: <input type="date" name="date" required>
-          </label><br>
-          <button type="submit">Save</button>
-        </form>
-      </div>
-    </div>
+    <h2>Track Player Stats Per Game</h2>
+    <form id="statsForm">
+      <input type="text" id="playerName" placeholder="Player Name" required>
+      <input type="number" id="points" placeholder="Points" min="0" required>
+      <input type="number" id="rebounds" placeholder="Rebounds" min="0">
+      <input type="number" id="assists" placeholder="Assists" min="0">
+      <input type="text" id="gameDate" placeholder="Game Date (YYYY-MM-DD)" required>
+      <button type="submit" class="btn">Add Stats</button>
+    </form>
+    <h3>Stats Table</h3>
+    <div id="statsTable"></div>
   </main>
   <footer>
-    <p>&copy; 2025 HoopStars Basketball Team</p>
+    <p>&copy; 2025 Ballero4Life</p>
   </footer>
-  <script src="assets/js/main.js"></script>
-  <script>
-    // Editable game info
-    function loadGameInfo() {
-      const info = JSON.parse(localStorage.getItem('gameInfo') || '{}');
-      document.getElementById('team-name').value = info.teamName || "HoopStars";
-      document.getElementById('opponent-name').value = info.opponentName || "";
-      document.getElementById('game-date').value = info.gameDate || "";
-    }
-    function saveGameInfo() {
-      const info = {
-        teamName: document.getElementById('team-name').value,
-        opponentName: document.getElementById('opponent-name').value,
-        gameDate: document.getElementById('game-date').value
-      };
-      localStorage.setItem('gameInfo', JSON.stringify(info));
-      alert("Game info saved!");
-      renderStats();
-    }
-
-    // Editable stats
-    function loadStatsData() {
-      let stats = [];
-      try {
-        stats = JSON.parse(localStorage.getItem('stats') || '[]');
-      } catch {}
-      return stats;
-    }
-    function saveStatsData(stats) {
-      localStorage.setItem('stats', JSON.stringify(stats));
-    }
-
-    function renderStats() {
-      // Win-loss
-      fetch('data/stats.json').then(r=>r.json()).then(data=>{
-        document.getElementById('win-loss').innerHTML =
-          `<strong>Wins:</strong> ${data.win} &nbsp; <strong>Losses:</strong> ${data.loss}`;
-
-        let stats = loadStatsData();
-        let rows = stats.map((player, idx) =>
-          `<tr>
-            <td contenteditable="true" onblur="editStat(${idx}, 'name', this.innerText)">${player.name}</td>
-            <td contenteditable="true" onblur="editStat(${idx}, 'points', this.innerText)">${player.points}</td>
-            <td contenteditable="true" onblur="editStat(${idx}, 'rebounds', this.innerText)">${player.rebounds}</td>
-            <td contenteditable="true" onblur="editStat(${idx}, 'assists', this.innerText)">${player.assists}</td>
-            <td contenteditable="true" onblur="editStat(${idx}, 'date', this.innerText)">${player.date || ''}</td>
-            <td>
-              <button onclick="deleteStat(${idx})">Delete</button>
-            </td>
-          </tr>`).join('');
-        document.querySelector('#player-stats tbody').innerHTML = rows;
-      });
-    }
-
-    function editStat(idx, key, value) {
-      let stats = loadStatsData();
-      stats[idx][key] = value;
-      saveStatsData(stats);
-    }
-    function deleteStat(idx) {
-      let stats = loadStatsData();
-      stats.splice(idx, 1);
-      saveStatsData(stats);
-      renderStats();
-    }
-
-    // Modal logic
-    function openModal(type) {
-      document.getElementById('modal').style.display = 'block';
-      document.getElementById('addForm').reset();
-    }
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-    document.getElementById('addForm').onsubmit = function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const newStat = {
-        name: form.name.value,
-        points: form.points.value,
-        rebounds: form.rebounds.value,
-        assists: form.assists.value,
-        date: form.date.value
-      };
-      let stats = loadStatsData();
-      stats.push(newStat);
-      saveStatsData(stats);
-      closeModal();
-      renderStats();
-    };
-
-    // Initial load
-    loadGameInfo();
-    renderStats();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
