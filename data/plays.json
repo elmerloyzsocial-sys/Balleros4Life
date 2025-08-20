@@ -1,7 +1,16 @@
-{
-  "plays": [
-    {"name": "Pick and Roll", "description": "Set a screen and roll to the basket for an easy shot."},
-    {"name": "Zone Defense", "description": "Players cover designated areas to prevent scoring."},
-    {"name": "Fast Break", "description": "Quick transition from defense to offense for a layup."}
-  ]
-}
+  {
+    "name": "Pick and Roll",
+    "description": "Ball handler uses a screen to drive or pass to the rolling big man."
+  },
+  {
+    "name": "Zone Breaker",
+    "description": "Quick ball movement and corner threes to dismantle zone defenses."
+  },
+  {
+    "name": "Isolation",
+    "description": "Clear out for your best scorer to take advantage of a mismatch."
+  },
+  {
+    "name": "Backdoor Cut",
+    "description": "Use fake screens to set up sneaky cuts behind defenders."
+  }
