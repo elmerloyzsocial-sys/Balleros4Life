@@ -1,1 +1,1 @@
-📸 Save images in the images/ folder and reference them in gallery.html. GitHub will host them automatically.
+📸 Save images in the images/ folder and reference them in gallery.html. GitHub will host them automatically. 
