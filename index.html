@@ -27,7 +27,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     main {
-      max-width: 450px;
+      max-width: 400px;
       margin: auto;
       padding: 1em;
       margin-top: 2em;
@@ -37,7 +37,7 @@
       flex-wrap: wrap;
       gap: 1.2em;
       justify-content: center;
-      margin-bottom: 1.5em;
+      margin-top: 0.5em;
     }
     .menu-card {
       background: var(--card);
@@ -57,7 +57,6 @@
       font-weight: 500;
       letter-spacing: -0.5px;
       position: relative;
-      margin-bottom: 0.5em;
     }
     .menu-card:active,
     .menu-card:hover {
@@ -75,120 +74,8 @@
       main { max-width: 99vw; padding: 0.5em; }
       .menu-card { font-size: 1em; min-width: 100px; max-width: 120px; padding: 1em 0.5em; }
       .menu-card span { font-size: 1.35em; }
+      header { font-size: 1.13em; }
       .menu-grid { gap: 0.7em; }
-    }
-    section {
-      background: var(--card);
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      border: 1px solid var(--border);
-      margin-bottom: 1.5em;
-      padding: 1em;
-    }
-    h2 {
-      color: var(--primary);
-      font-size: 1.15em;
-      margin-top: 0;
-      margin-bottom: .7em;
-    }
-    .responsive-table { overflow-x: auto; }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 1em;
-      margin-bottom: 1em;
-    }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px 6px;
-      text-align: left;
-    }
-    th {
-      background: #f0f0f5;
-      font-weight: 600;
-    }
-    .event-table th, .event-table td { text-align: center; }
-    .yt-section {
-      margin-bottom: 1.5em;
-    }
-    .yt-section h3 {
-      margin: 0.7em 0 0.3em 0;
-      color: #243d68;
-      font-size: 1em;
-      font-weight: 600;
-    }
-    .yt-list {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-    }
-    .yt-list li {
-      margin-bottom: 0.6em;
-      background: #f0f0f5;
-      padding: 0.4em 0.6em;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      gap: 0.7em;
-      font-size: 0.97em;
-    }
-    .yt-list a {
-      color: #243d68;
-      text-decoration: underline;
-      word-break: break-all;
-    }
-    .yt-form {
-      display: flex;
-      gap: 0.4em;
-      flex-wrap: wrap;
-      margin-bottom: 1em;
-      align-items: center;
-    }
-    .yt-form input, .yt-form select, .yt-form button {
-      font-size: 1em;
-      padding: 0.4em 0.55em;
-      border-radius: 4px;
-      border: 1px solid #e5e5e5;
-      flex: 1 1 100px;
-      min-width: 0;
-    }
-    .yt-form button {
-      background: var(--accent);
-      color: #222;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      min-width: 80px;
-      flex: 1 1 80px;
-    }
-    .yt-list .remove {
-      background: #ffb2b2;
-      border: none;
-      color: #243d68;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 0.92em;
-      padding: 0.2em 0.5em;
-      margin-left: 0.3em;
-    }
-    .about-contact {
-      background: #f9f9fc;
-      padding: 1em;
-      border-radius: 8px;
-      margin-bottom: 1em;
-    }
-    .about-contact h3 {
-      margin: 0.7em 0 0.3em 0;
-      color: #243d68;
-      font-size: 1em;
-      font-weight: 600;
-    }
-    .about-contact p, .about-contact ul { margin-top: 0.3em; font-size: 0.97em; }
-    .about-contact ul { padding-left: 1.2em; }
-    @media (max-width: 480px) {
-      section { padding: 0.6em; }
-      th, td { font-size: 0.95em; padding: 5px 3px; }
-      h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
     }
     footer {
       text-align: center;
@@ -208,6 +95,14 @@
         <span>🏀</span>
         Next Game
       </a>
+      <a class="menu-card" href="standings.html">
+        <span>📊</span>
+        Standings
+      </a>
+      <a class="menu-card" href="teamstats.html">
+        <span>🥇</span>
+        Team Stats
+      </a>
       <a class="menu-card" href="gallery.html">
         <span>🖼️</span>
         Gallery
@@ -220,6 +115,10 @@
         <span>🤳</span>
         Player Photos
       </a>
+      <a class="menu-card" href="calendar.html">
+        <span>📅</span>
+        Game Calendar
+      </a>
       <a class="menu-card" href="advice.html">
         <span>💡</span>
         Advice
@@ -229,133 +128,9 @@
         Plays
       </a>
     </nav>
-    <section>
-      <h2>Events & Team Games</h2>
-      <div class="responsive-table">
-        <table class="event-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Opponent</th>
-              <th>Location</th>
-              <th>Our Score</th>
-              <th>Opponent Score</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody id="eventsTableBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section>
-      <h2>YouTube Resources</h2>
-      <form class="yt-form" id="ytForm">
-        <select id="ytType">
-          <option value="offense">Offense</option>
-          <option value="defense">Defense</option>
-          <option value="inplay">In-Play</option>
-        </select>
-        <input type="text" id="ytTitle" placeholder="Video Title" required>
-        <input type="url" id="ytUrl" placeholder="YouTube URL" required>
-        <button type="submit">Add Video</button>
-      </form>
-      <div class="yt-section">
-        <h3>Offense</h3>
-        <ul class="yt-list" id="ytOffense"></ul>
-      </div>
-      <div class="yt-section">
-        <h3>Defense</h3>
-        <ul class="yt-list" id="ytDefense"></ul>
-      </div>
-      <div class="yt-section">
-        <h3>In-Play</h3>
-        <ul class="yt-list" id="ytInplay"></ul>
-      </div>
-    </section>
-
-    <section class="about-contact">
-      <h3>About Us</h3>
-      <p>Balleros4Life is a community basketball club dedicated to teamwork, fun, and growth. We organize matches, events, and training for all skill levels.</p>
-      <h3>Contact</h3>
-      <ul>
-        <li>Email: <a href="mailto:contact@balleros4life.com">contact@balleros4life.com</a></li>
-        <li>Instagram: <a href="https://instagram.com/balleros4life" target="_blank">@balleros4life</a></li>
-        <li>Phone: <a href="tel:+1234567890">+1 234-567-890</a></li>
-      </ul>
-    </section>
   </main>
   <footer>
     &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
   </footer>
-  <script>
-    // --- EVENTS / TEAM GAMES TABLE ---
-    const games = [
-      { date: '2025-08-22', opponent: 'Falcons', location: 'Home', result: null, ourScore: null, oppScore: null },
-      { date: '2025-08-29', opponent: 'Eagles', location: 'Away', result: null, ourScore: null, oppScore: null },
-      { date: '2025-08-15', opponent: 'Bulls', location: 'Away', result: 'Win', ourScore: 88, oppScore: 75 },
-      { date: '2025-08-08', opponent: 'Sharks', location: 'Home', result: 'Loss', ourScore: 65, oppScore: 70 }
-    ];
-    function renderEventsTable() {
-      const tbody = document.getElementById('eventsTableBody');
-      tbody.innerHTML = games.map(g => `
-        <tr>
-          <td>${g.date}</td>
-          <td>${g.opponent}</td>
-          <td>${g.location}</td>
-          <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
-          <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
-          <td>${g.result ? g.result : 'Upcoming'}</td>
-        </tr>
-      `).join('');
-    }
-    // --- YOUTUBE LINKS ---
-    function getYT() {
-      return JSON.parse(localStorage.getItem('ytLinks') || '{"offense":[],"defense":[],"inplay":[]}');
-    }
-    function saveYT(data) {
-      localStorage.setItem('ytLinks', JSON.stringify(data));
-    }
-    function renderYT() {
-      const yt = getYT();
-      function renderList(type, elId) {
-        const ul = document.getElementById(elId);
-        ul.innerHTML = yt[type].map((v, idx) => `
-          <li>
-            <span>${v.title}</span>
-            <a href="${v.url}" target="_blank">Watch</a>
-            <button class="remove" title="Remove" onclick="removeYT('${type}',${idx})">&times;</button>
-          </li>
-        `).join('');
-      }
-      renderList('offense', 'ytOffense');
-      renderList('defense', 'ytDefense');
-      renderList('inplay', 'ytInplay');
-    }
-    function removeYT(type, idx) {
-      const yt = getYT();
-      yt[type].splice(idx, 1);
-      saveYT(yt);
-      renderYT();
-    }
-    window.removeYT = removeYT;
-    document.addEventListener("DOMContentLoaded", function() {
-      renderEventsTable();
-      renderYT();
-      document.getElementById('ytForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const type = document.getElementById('ytType').value;
-        const title = document.getElementById('ytTitle').value.trim();
-        const url = document.getElementById('ytUrl').value.trim();
-        if (title && url) {
-          const yt = getYT();
-          yt[type].push({ title, url });
-          saveYT(yt);
-          renderYT();
-          e.target.reset();
-        }
-      });
-    });
-  </script>
 </body>
 </html>
