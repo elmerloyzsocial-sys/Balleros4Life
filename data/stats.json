@@ -1,9 +1,0 @@
-{
-  "win": 12,
-  "loss": 3,
-  "players": [
-    {"name": "John Doe", "points": 22, "rebounds": 8, "assists": 5},
-    {"name": "Sam Lee", "points": 18, "rebounds": 10, "assists": 7},
-    {"name": "Alex Kim", "points": 15, "rebounds": 5, "assists": 9}
-  ]
-}

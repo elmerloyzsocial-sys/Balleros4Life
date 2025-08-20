@@ -1,1 +1,0 @@
-Here are the sample JSON files to power your Ballero4Life website. You can place these inside the data/ folder of your project and easily update them as your season progresses.
