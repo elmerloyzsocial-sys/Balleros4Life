@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // ==== MANUAL PLAYER PHOTO DISPLAY ====
 // Add player info here. Image should be uploaded to images/players/
 const players = [
-  { name: "Sample Player", img: "images/players/sample_player.jpg" },
+  { name: "Loyz", img: "images/players/Loyz.jpg" },
   // Add more players below. Example:
   // { name: "John Doe", img: "images/players/john_doe.jpg" },
   // { name: "Jane Smith", img: "images/players/jane_smith.png" },
