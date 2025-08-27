@@ -118,10 +118,10 @@ document.addEventListener("DOMContentLoaded", function() {
     ` : 'No upcoming games.';
 
     // Standings
-    let standingsHTML = `<table><tr><th>Team</th><th>Wins</th><th>Losses</th></tr>`;
-    standings.forEach(s => standingsHTML += `<tr><td>${s.team}</td><td>${s.wins}</td><td>${s.losses}</td></tr>`);
-    standingsHTML += `</table>`;
-    document.getElementById('standingsTable').innerHTML = standingsHTML;
+    let standingsHTML = `<table><tr><th>Team</th><th>Record</th><th>Point Differential</th></tr>`;
+	standing.forEach(s => standingsHTML += `<tr><td>${s.name}</td><td>${s.record}</td><td>${s.pointDifferential}</td></tr>`);
+	standingsHTML += `</table>`;
+	document.getElementById('standingsTable').innerHTML = standingsHTML;
 
     // Team Stats Table
     let teamStatsHTML = `<table>
