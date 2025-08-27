@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Load shared standings data -->
+  <script src="standings-data.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -43,11 +45,11 @@
           </tr>
           <tr>
             <td>Seed 1 vs. Seed 4</td>
-            <td>SF1</td>
+            <td id="d3-sf1">SF1</td>
           </tr>
           <tr>
             <td>Seed 2 vs. Seed 3</td>
-            <td>SF2</td>
+            <td id="d3-sf2">SF2</td>
           </tr>
           <tr>
             <td colspan="2" style="text-align:center; font-weight:bold;">Finals</td>
@@ -74,19 +76,19 @@
           </tr>
           <tr>
             <td>Seed 5 vs. Seed 12</td>
-            <td>QF1</td>
+            <td id="d4-qf1">QF1</td>
           </tr>
           <tr>
             <td>Seed 8 vs. Seed 9</td>
-            <td>QF2</td>
+            <td id="d4-qf2">QF2</td>
           </tr>
            <tr>
             <td>Seed 7 vs. Seed 10</td>
-            <td>QF3</td>
+            <td id="d4-qf3">QF3</td>
           </tr>
            <tr>
             <td>Seed 6 vs. Seed 11</td>
-            <td>QF4</td>
+            <td id="d4-qf4">QF4</td>
           </tr>
           <tr>
             <td colspan="2" style="text-align:center; font-weight:bold;">Semifinals</td>
@@ -120,11 +122,11 @@
         </thead>
         <tbody>
           <tr>
-            <td>13</td>
+            <td id="elim13">13</td>
             <td style="color:red; font-weight:bold;">ELIMINATED</td>
           </tr>
           <tr>
-            <td>14</td>
+            <td id="elim14">14</td>
             <td style="color:red; font-weight:bold;">ELIMINATED</td>
           </tr>
         </tbody>
@@ -136,5 +138,61 @@
     &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
   </footer>
   <script src="script.js"></script>
+  <script>
+    // Dynamically fill playoff matchups using standings data
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof standing !== 'undefined' && Array.isArray(standing)) {
+        // Sort by record and point differential (same logic as standing.html)
+        const parseRecord = r => {
+          const [win, loss] = r.record.split('–').map(Number);
+          return { win, loss };
+        };
+        const sorted = [...standing].sort((a, b) => {
+          const ra = parseRecord(a), rb = parseRecord(b);
+          if (rb.win !== ra.win) return rb.win - ra.win;
+          if (ra.loss !== rb.loss) return ra.loss - rb.loss;
+          return (b.pointDifferential - a.pointDifferential);
+        });
+
+        // Division 3 playoff
+        const d3sf1 = document.getElementById('d3-sf1');
+        const d3sf2 = document.getElementById('d3-sf2');
+        if (d3sf1 && sorted[0] && sorted[3]) {
+          d3sf1.textContent = `${sorted[0].name} (Seed 1) vs. ${sorted[3].name} (Seed 4)`;
+        }
+        if (d3sf2 && sorted[1] && sorted[2]) {
+          d3sf2.textContent = `${sorted[1].name} (Seed 2) vs. ${sorted[2].name} (Seed 3)`;
+        }
+
+        // Division 4 playoff
+        const d4qf1 = document.getElementById('d4-qf1');
+        const d4qf2 = document.getElementById('d4-qf2');
+        const d4qf3 = document.getElementById('d4-qf3');
+        const d4qf4 = document.getElementById('d4-qf4');
+        if (d4qf1 && sorted[4] && sorted[11]) {
+          d4qf1.textContent = `${sorted[4].name} (Seed 5) vs. ${sorted[11].name} (Seed 12)`;
+        }
+        if (d4qf2 && sorted[7] && sorted[8]) {
+          d4qf2.textContent = `${sorted[7].name} (Seed 8) vs. ${sorted[8].name} (Seed 9)`;
+        }
+        if (d4qf3 && sorted[6] && sorted[9]) {
+          d4qf3.textContent = `${sorted[6].name} (Seed 7) vs. ${sorted[9].name} (Seed 10)`;
+        }
+        if (d4qf4 && sorted[5] && sorted[10]) {
+          d4qf4.textContent = `${sorted[5].name} (Seed 6) vs. ${sorted[10].name} (Seed 11)`;
+        }
+
+        // Eliminated teams (seeds 13 & 14)
+        const elim13 = document.getElementById('elim13');
+        const elim14 = document.getElementById('elim14');
+        if (elim13 && sorted[12]) {
+          elim13.textContent = `13 - ${sorted[12].name}`;
+        }
+        if (elim14 && sorted[13]) {
+          elim14.textContent = `14 - ${sorted[13].name}`;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
