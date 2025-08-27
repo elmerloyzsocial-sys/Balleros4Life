@@ -24,19 +24,50 @@
       </nav>
       </div>
   </header>
-  <main>
+   <main>
     <a href="index.html" class="back">&larr; Home</a>
     <section>
-      <h1>Player Photos & Individual Stats</h1>
-      <form id="playerPhotoForm">
-        <input type="text" id="photoPlayerName" placeholder="Player Name" required />
-        <input type="file" id="playerPhotoUpload" accept="image/*" required />
-        <button type="submit">Upload Photo</button>
+      <h1>Player Facebook Links & Individual Stats</h1>
+      <form id="playerFacebookForm">
+        <input type="text" id="facebookPlayerName" placeholder="Player Name" required />
+        <input type="url" id="playerFacebookUrl" placeholder="Facebook Profile URL" required />
+        <button type="submit">Add Link</button>
       </form>
-      <div id="playerPhotos"></div>
+      <div id="playerFacebookLinks">
+        <!-- Sample Facebook link -->
+        <div class="player-link">
+          <a href="https://facebook.com/john.doe" target="_blank">
+            <i class="fab fa-facebook-square"></i> John Doe
+          </a>
+        </div>
+      </div>
       <div id="playerStatsTables" class="responsive-table"></div>
     </section>
   </main>
+  <script>
+    // Handling Facebook links instead of photos
+    document.getElementById('playerFacebookForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('facebookPlayerName').value.trim();
+      const url = document.getElementById('playerFacebookUrl').value.trim();
+      if(name && url) {
+        addFacebookLink(name, url);
+        this.reset();
+      }
+    });
+
+    function addFacebookLink(name, url) {
+      const linksDiv = document.getElementById('playerFacebookLinks');
+      const linkItem = document.createElement('div');
+      linkItem.className = 'player-link';
+      linkItem.innerHTML = `
+        <a href="${url}" target="_blank">
+          <i class="fab fa-facebook-square"></i> ${name}
+        </a>
+      `;
+      linksDiv.appendChild(linkItem);
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
