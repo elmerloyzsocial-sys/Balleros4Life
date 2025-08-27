@@ -110,14 +110,11 @@
         }
       }
 
-      // Prepare HTML output
-      let html = "";
-      gamesArr.forEach((players, idx) => {
-        html += `<div class="game">
-          <div class="game-title">Game ${idx + 1} Matchup:</div>
-          <ol>${players.map(p => `<li>${p}</li>`).join('')}</ol>
-        </div>`;
-      });
+      // Prepare HTML output -- ONLY show the first game
+      let html = `<div class="game">
+        <div class="game-title">Game 1 Matchup:</div>
+        <ol>${gamesArr[0].map(p => `<li>${p}</li>`).join('')}</ol>
+      </div>`;
 
       // Player games played table
       html += `<table>
