@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Standings - Ballero4Life</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <h1>Ballero4Life</h1>
+      <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+        <a href="stats.html"><i class="fas fa-chart-bar"></i> Stats</a>
+        <a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+        <a href="advice.html"><i class="fas fa-basketball-ball"></i> Coach Advice</a>
+        <a href="plays.html"><i class="fas fa-chalkboard"></i> Plays</a>
+        <a href="standing.html"><i class="fas fa-list-ol"></i> Standings</a>
+      </nav>
+      </div>
+  </header>
+  <main>
+    <h2>League Standings</h2>
+    <div class="standings-placeholder">
+      <!-- Standings table will be rendered here -->
+      <table id="standings-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Team Name</th>
+            <th>Record</th>
+            <th>Point Differential</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table rows will be dynamically inserted by script.js -->
+        </tbody>
+      </table>
+      <p><a href="index.html">Back to Home</a></p>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    // If standings data is defined in script.js as 'const standing = [...]'
+    // Render standings table dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof standing !== 'undefined' && Array.isArray(standing)) {
+        const tbody = document.querySelector('#standings-table tbody');
+        // Sort by record (wins first, then point differential)
+        const parseRecord = r => {
+          const [win, loss] = r.record.split('–').map(Number);
+          return { win, loss };
+        };
+        // Sorting logic: most wins, then better point differential
+        const sorted = [...standing].sort((a, b) => {
+          const ra = parseRecord(a), rb = parseRecord(b);
+          if (rb.win !== ra.win) return rb.win - ra.win;
+          if (ra.loss !== rb.loss) return ra.loss - rb.loss;
+          return (b.pointDifferential - a.pointDifferential);
+        });
+        sorted.forEach((team, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${idx + 1}</td>
+            <td>${team.name}</td>
+            <td>${team.record}</td>
+            <td>${team.pointDifferential > 0 ? '+' : ''}${team.pointDifferential}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } else {
+        // fallback if standings not loaded
+        document.querySelector('.standings-placeholder').innerHTML += '<p>Standings data unavailable.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
