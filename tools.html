@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Basketball Tools | Balleros4Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #263238;
+      --accent: #f7b32b;
+      --bg: #f7f7fa;
+      --card: #fff;
+      --border: #e5e5e5;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #222;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.2em 1em;
+      text-align: center;
+      font-size: 1.3em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    main {
+      max-width: 450px;
+      margin: auto;
+      padding: 1em;
+      margin-top: 2em;
+    }
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2em;
+      justify-content: center;
+      margin-bottom: 1.5em;
+    }
+    .menu-card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 1.2em 0.8em;
+      min-width: 120px;
+      max-width: 160px;
+      flex: 1 1 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: box-shadow 0.15s, transform 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.13em;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      position: relative;
+      margin-bottom: 0.5em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .menu-card:active,
+    .menu-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-2px) scale(1.03);
+      background: #f9f9fc;
+    }
+    .menu-card span {
+      font-size: 2em;
+      display: block;
+      margin-bottom: 0.35em;
+      color: var(--accent);
+    }
+    @media (max-width: 480px) {
+      main { max-width: 99vw; padding: 0.5em; }
+      .menu-card { font-size: 1em; min-width: 160px; max-width: 220px; padding: 1.5em 1.1em; }
+      .menu-card span { font-size: 1.35em; }
+      .menu-grid { gap: 0.7em; }
+    }
+    section {
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5em;
+      padding: 1em;
+    }
+    h2 {
+      color: var(--primary);
+      font-size: 1.15em;
+      margin-top: 0;
+      margin-bottom: .7em;
+    }
+    .tool-content {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .hidden {
+      display: none;
+    }
+    .player-list {
+      margin: 0.7em 0 1em 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3em;
+    }
+    .player-tag {
+      background: #f0f0f5;
+      border-radius: 5px;
+      padding: 0.2em 0.7em;
+      font-size: 0.96em;
+      margin-right: 0.2em;
+      margin-bottom: 0.2em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .player-tag .remove {
+      background: #ffb2b2;
+      border: none;
+      color: #243d68;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.92em;
+      padding: 0.1em 0.4em;
+      margin-left: 0.3em;
+    }
+    .matchup-list {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .matchup-list li {
+      background: #f7f7fa;
+      border-radius: 6px;
+      padding: 0.5em 0.7em;
+      margin-bottom: 0.5em;
+      border: 1px solid #e5e5e5;
+      font-size: 1.05em;
+      text-align: left;
+    }
+    .tool-form {
+      display: flex;
+      gap: 0.4em;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1em;
+    }
+    .tool-form input, .tool-form button {
+      font-size: 1em;
+      padding: 0.4em 0.55em;
+      border-radius: 4px;
+      border: 1px solid #e5e5e5;
+      min-width: 0;
+    }
+    .tool-form button {
+      background: var(--accent);
+      color: #222;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      min-width: 80px;
+    }
+    .tool-form label {
+      font-size: 0.98em;
+      margin-right: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Balleros4Life</h1>
+    <h2 style="color:#f7b32b; display: flex; align-items: center; justify-content: center; gap: 0.5em;">
+      <img src="images/logo.png" alt="Team Logo" style="height: 48px; width: 30px; vertical-align: top;">
+      Basketball Tools
+    </h2>
+  </header>
+  <main>
+    <nav class="menu-grid">
+      <div class="menu-card" id="matchupCard" tabindex="0">
+        <span>🔀</span>
+        Matchup Generator
+        <div class="tool-content hidden" id="matchupTool">
+          <h2>Basketball Matchup Generator</h2>
+          <form class="tool-form" id="playerForm">
+            <input type="text" id="playerName" placeholder="Add player name" autocomplete="off">
+            <button type="submit">Add</button>
+          </form>
+          <div class="player-list" id="playerList"></div>
+          <form class="tool-form" id="matchupForm">
+            <label for="numGames"># Games:</label>
+            <input type="number" id="numGames" min="1" value="3" style="max-width:60px;">
+            <button type="submit">Generate Matchups</button>
+          </form>
+          <ul class="matchup-list" id="matchupList"></ul>
+        </div>
+      </div>
+      <div class="menu-card" id="tool2Card" tabindex="0">
+        <span>📏</span>
+        Measurement Tool
+        <div class="tool-content hidden" id="tool2Content">
+          <h2>Measurement Tool</h2>
+          <p>Feature coming soon! Suggest a tool for this spot.</p>
+        </div>
+      </div>
+    </nav>
+  </main>
+  <script>
+    // --- MENU CARD TOGGLE ---
+    function showTool(toolId, cardId) {
+      document.querySelectorAll('.tool-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(toolId).classList.remove('hidden');
+      document.querySelectorAll('.menu-card').forEach(el => el.classList.remove('selected'));
+      document.getElementById(cardId).classList.add('selected');
+    }
+    document.getElementById('matchupCard').addEventListener('click', function() {
+      showTool('matchupTool', 'matchupCard');
+    });
+    document.getElementById('tool2Card').addEventListener('click', function() {
+      showTool('tool2Content', 'tool2Card');
+    });
+
+    // Make first tool visible by default
+    document.addEventListener('DOMContentLoaded', function() {
+      showTool('matchupTool', 'matchupCard');
+    });
+
+    // --- MATCHUP GENERATOR LOGIC ---
+    const playerForm = document.getElementById('playerForm');
+    const playerNameInput = document.getElementById('playerName');
+    const playerListDiv = document.getElementById('playerList');
+    let players = [];
+
+    function renderPlayerList() {
+      playerListDiv.innerHTML = players.map((name, idx) =>
+        `<span class="player-tag">${name}
+          <button class="remove" title="Remove" onclick="removePlayer(${idx})">&times;</button>
+        </span>`
+      ).join('');
+    }
+
+    playerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = playerNameInput.value.trim();
+      if (name && !players.includes(name)) {
+        players.push(name);
+        renderPlayerList();
+        playerNameInput.value = '';
+      }
+    });
+
+    window.removePlayer = function(idx) {
+      players.splice(idx, 1);
+      renderPlayerList();
+    };
+
+    // --- MATCHUP GENERATOR ---
+    const matchupForm = document.getElementById('matchupForm');
+    const numGamesInput = document.getElementById('numGames');
+    const matchupList = document.getElementById('matchupList');
+
+    matchupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const numGames = parseInt(numGamesInput.value, 10);
+      if (players.length < 2 || numGames < 1) {
+        matchupList.innerHTML = `<li>Add at least 2 players and set # games.</li>`;
+        return;
+      }
+      // Generate all possible pairs
+      const pairs = [];
+      for (let i = 0; i < players.length; i++) {
+        for (let j = i + 1; j < players.length; j++) {
+          pairs.push([players[i], players[j]]);
+        }
+      }
+      // Shuffle pairs
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+      // Assign matchups
+      let matchups = [];
+      let playerGameCount = Object.fromEntries(players.map(p => [p, 0]));
+      let totalGames = numGames * players.length;
+      let attempts = 0;
+
+      // Try to distribute games as equally as possible for each player
+      while (matchups.length < totalGames && attempts < 10000) {
+        attempts++;
+        shuffle(pairs);
+        for (const pair of pairs) {
+          if (matchups.length >= totalGames) break;
+          const [p1, p2] = pair;
+          if (playerGameCount[p1] < numGames && playerGameCount[p2] < numGames) {
+            matchups.push(pair);
+            playerGameCount[p1]++;
+            playerGameCount[p2]++;
+          }
+        }
+      }
+      // If can't fill all, just fill with what we have
+      if (matchups.length === 0) {
+        matchupList.innerHTML = `<li>Not enough unique pairs to fill requested games. Try fewer games or add more players.</li>`;
+        return;
+      }
+      // Display matchups
+      matchupList.innerHTML = matchups.map((pair, idx) => 
+        `<li><b>Game ${idx + 1}:</b> <span>${pair[0]}</span> vs <span>${pair[1]}</span></li>`
+      ).join('');
+    });
+  </script>
+  <footer>
+    &copy; 2025 Balleros4Life &mdash; Basketball Tools
+  </footer>
+</body>
+</html>
