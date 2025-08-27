@@ -27,47 +27,132 @@
    <main>
     <a href="index.html" class="back">&larr; Home</a>
     <section>
-      <h1>Player Facebook Links</h1>
-      <form id="playerFacebookForm">
-        <input type="text" id="facebookPlayerName" placeholder="Player Name" required />
-        <input type="url" id="playerFacebookUrl" placeholder="Facebook Profile URL" required />
-        <button type="submit">Add Link</button>
-      </form>
-      <div id="playerFacebookLinks">
-        <!-- Sample Facebook link -->
-        <div class="player-link">
-          <a href="https://facebook.com/john.doe" target="_blank">
-            <i class="fab fa-facebook-square"></i> John Doe
-          </a>
-        </div>
-      </div>
+      <h1>Player Facebook Links & Individual Stats</h1>
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Notes</th>
+            <th>Facebook Profile Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Jerwin P.</td>
+            <td>Captain (C)</td>
+            <td>
+              <a href="https://facebook.com/tree.j" target="_blank" title="Tree J. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>55</td>
+            <td>Dan A.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/aquino.d" target="_blank" title="Aquino D Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Rey R.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/ramos.r" target="_blank" title="Ramos R Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Dee S.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/sebastian" target="_blank" title="Sebastian Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Bryan S.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/soronio.b" target="_blank" title="Soronio B. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Jay J.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/jose.j" target="_blank" title="Jose J. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>42</td>
+            <td>Loyz V.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/viernes.l" target="_blank" title="Viernes L. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Elvis C.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/cachola.e" target="_blank" title="Cachola E. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Lloyd C.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/callsin.c" target="_blank" title="Callsin C. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Jeremy S.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/sebastian2" target="_blank" title="Sebastian Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Jordan C.</td>
+            <td></td>
+            <td>
+              <a href="https://facebook.com/corpuz.j" target="_blank" title="Corpuz J. Facebook">
+                <i class="fab fa-facebook-square"></i> Link
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <div id="playerStatsTables" class="responsive-table"></div>
     </section>
   </main>
-  <script>
-    // Handling Facebook links instead of photos
-    document.getElementById('playerFacebookForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('facebookPlayerName').value.trim();
-      const url = document.getElementById('playerFacebookUrl').value.trim();
-      if(name && url) {
-        addFacebookLink(name, url);
-        this.reset();
-      }
-    });
-
-    function addFacebookLink(name, url) {
-      const linksDiv = document.getElementById('playerFacebookLinks');
-      const linkItem = document.createElement('div');
-      linkItem.className = 'player-link';
-      linkItem.innerHTML = `
-        <a href="${url}" target="_blank">
-          <i class="fab fa-facebook-square"></i> ${name}
-        </a>
-      `;
-      linksDiv.appendChild(linkItem);
-    }
-  </script>
   <script src="script.js"></script>
 </body>
 </html>
