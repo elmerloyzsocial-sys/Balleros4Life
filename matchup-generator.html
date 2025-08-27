@@ -15,8 +15,14 @@
     .game { background: #f7f7fa; border-radius: 8px; margin-bottom: 1em; padding: 1em 1em; border: 1px solid #e5e5e5; }
     .game-title { color: #263238; font-size: 1.06em; font-weight: 600; margin-bottom: 0.5em; }
     .unassigned { color: #d32f2f; margin-top: 1em; padding: 0.8em; background: #fff3f3; border-radius: 6px; border: 1px solid #ffc3c3; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1.5em; background: #f9f9fc; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 0.6em 0.8em; border: 1px solid #e5e5e5; text-align: left; }
+    th { background: #f7b32b; color: #222; }
+    td { background: #fff; }
+    caption { text-align: left; font-weight: bold; font-size: 1.08em; margin-bottom: 0.4em; color: #263238; }
     @media (max-width: 600px) {
       .container { max-width: 99vw; padding: 1em 0.3em; }
+      table, th, td { font-size: 0.98em; }
     }
   </style>
 </head>
@@ -112,6 +118,25 @@
           <ol>${players.map(p=>`<li>${p}</li>`).join('')}</ol>
         </div>`;
       });
+
+      // Player games played table
+      html += `<table>
+        <caption>Player Participation</caption>
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Games Played</th>
+          </tr>
+        </thead>
+        <tbody>
+        ${assignments.map(a=>`
+          <tr>
+            <td>${a.name}</td>
+            <td>${a.assigned.length}</td>
+          </tr>
+        `).join('')}
+        </tbody>
+      </table>`;
 
       // Find any player who couldn't be assigned to all their possible games
       let unassigned = assignments.filter(a=>a.assigned.length < a.games);
