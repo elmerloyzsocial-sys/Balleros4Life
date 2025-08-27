@@ -14,7 +14,8 @@
     .results { margin-top: 2em; }
     .game { background: #f7f7fa; border-radius: 8px; margin-bottom: 1em; padding: 1em 1em; border: 1px solid #e5e5e5; }
     .game-title { color: #263238; font-size: 1.06em; font-weight: 600; margin-bottom: 0.5em; }
-    .unassigned { color: #d32f2f; margin-top: 1em; padding: 0.8em; background: #fff3f3; border-radius: 6px; border: 1px solid #ffc3c3; }
+    .unassigned, .notice { color: #d32f2f; margin-top: 1em; padding: 0.8em; background: #fff3f3; border-radius: 6px; border: 1px solid #ffc3c3; }
+    .notice { color: #f57c00; background: #fffbe9; border-color: #ffe0b2; }
     table { width: 100%; border-collapse: collapse; margin-top: 1.5em; background: #f9f9fc; border-radius: 8px; overflow: hidden; }
     th, td { padding: 0.6em 0.8em; border: 1px solid #e5e5e5; text-align: left; }
     th { background: #f7b32b; color: #222; }
@@ -40,82 +41,75 @@
   </div>
   <script>
     function shuffle(array) {
-      for(let i=array.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));
-        [array[i],array[j]]=[array[j],array[i]];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
     }
 
-    document.getElementById('matchupForm').addEventListener('submit', function(e){
+    function unique(array) {
+      return Array.from(new Set(array));
+    }
+
+    document.getElementById('matchupForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const playerStr = document.getElementById('players').value;
       const numGames = parseInt(document.getElementById('games').value, 10);
 
-      // Parse player names
+      // Parse and clean player names
       let players = playerStr.split(/[\n,]+/)
         .map(p => p.trim())
         .filter(p => p.length > 0);
+      players = unique(players);
 
-      if(players.length < 10) {
-        document.getElementById('results').innerHTML = "<div class='unassigned'>Need at least 10 players.</div>";
-        return;
-      }
-      if(numGames < 1) {
-        document.getElementById('results').innerHTML = "<div class='unassigned'>Number of games must be at least 1.</div>";
-        return;
-      }
-
-      // Shuffle for fairness
-      players = shuffle(players);
-
-      // Assign players to games
-      // Each game needs 10 players
       const totalSpots = numGames * 10;
       const numPlayers = players.length;
-      // Calculate how many games each player gets
-      const gamesPerPlayer = Math.floor(totalSpots / numPlayers);
-      const leftoverSpots = totalSpots % numPlayers;
 
-      // Build assignment array
-      // Example: If gamesPerPlayer = 2, leftoverSpots = 4, first 4 players get an extra game
-      let assignments = [];
-      for(let i=0;i<numPlayers;i++){
-        let count = gamesPerPlayer + (i < leftoverSpots ? 1 : 0);
-        assignments.push({ name: players[i], games: count, assigned: [] });
+      const resultsDiv = document.getElementById('results');
+      if (numPlayers < 10) {
+        resultsDiv.innerHTML = "<div class='unassigned'>Need at least 10 unique players to form a full game.</div>";
+        return;
+      }
+      if (numPlayers < totalSpots) {
+        resultsDiv.innerHTML = `<div class='unassigned'>You need at least ${totalSpots} unique players for ${numGames} games. You entered only ${numPlayers}.</div>`;
+        return;
       }
 
-      // Now assign players to games as evenly as possible
-      let gamesArr = Array.from({length: numGames}, ()=>[]);
-      // Create a flat list where each player appears as many times as their game count
-      let pool = [];
-      assignments.forEach(a=>{
-        for(let i=0;i<a.games;i++) pool.push(a.name);
-      });
-      // Shuffle pool for fairness
-      pool = shuffle(pool);
+      let notice = "";
+      if (numPlayers > totalSpots) {
+        notice = `<div class='notice'>You provided ${numPlayers} players, but only ${totalSpots} are needed for ${numGames} games. The extra players will not be assigned to games.</div>`;
+        // Only use the first totalSpots players after shuffling for fairness
+        players = shuffle(players).slice(0, totalSpots);
+      } else {
+        players = shuffle(players);
+      }
 
       // Assign 10 players per game
-      for(let g=0;g<numGames;g++){
-        for(let i=0;i<10;i++){
-          // Find a player who is not already in this game
-          let idx = pool.findIndex(p => !gamesArr[g].includes(p));
-          if(idx === -1) break; // not enough unique players left for this game
-          let player = pool.splice(idx,1)[0];
-          gamesArr[g].push(player);
+      const gamesArr = [];
+      for (let g = 0; g < numGames; g++) {
+        gamesArr.push(players.slice(g * 10, g * 10 + 10));
+      }
 
-          // Mark assigned
-          let aObj = assignments.find(a=>a.name===player);
-          aObj.assigned.push(g+1);
-        }
+      // Prepare player participation info
+      const assignments = [];
+      for (let g = 0; g < numGames; g++) {
+        gamesArr[g].forEach(p => {
+          let found = assignments.find(a => a.name === p);
+          if (!found) {
+            assignments.push({ name: p, games: [g + 1] });
+          } else {
+            found.games.push(g + 1);
+          }
+        });
       }
 
       // Prepare HTML output
-      let html = "";
-      gamesArr.forEach((players, idx)=>{
+      let html = notice;
+      gamesArr.forEach((players, idx) => {
         html += `<div class="game">
-          <div class="game-title">Game ${idx+1} Matchup:</div>
-          <ol>${players.map(p=>`<li>${p}</li>`).join('')}</ol>
+          <div class="game-title">Game ${idx + 1} Matchup:</div>
+          <ol>${players.map(p => `<li>${p}</li>`).join('')}</ol>
         </div>`;
       });
 
@@ -126,31 +120,21 @@
           <tr>
             <th>Player Name</th>
             <th>Games Played</th>
+            <th>Game Numbers</th>
           </tr>
         </thead>
         <tbody>
-        ${assignments.map(a=>`
+        ${assignments.map(a => `
           <tr>
             <td>${a.name}</td>
-            <td>${a.assigned.length}</td>
+            <td>${a.games.length}</td>
+            <td>${a.games.join(', ')}</td>
           </tr>
         `).join('')}
         </tbody>
       </table>`;
 
-      // Find any player who couldn't be assigned to all their possible games
-      let unassigned = assignments.filter(a=>a.assigned.length < a.games);
-      if(unassigned.length) {
-        html += `<div class="unassigned"><strong>Players who could not be assigned to all their games:</strong><br/>${unassigned.map(a=>a.name).join(', ')}</div>`;
-      } else {
-        // Also show if a player couldn't play in other games (asked in request)
-        let notInAllGames = assignments.filter(a=>a.assigned.length < numGames);
-        if(notInAllGames.length) {
-          html += `<div class="unassigned"><strong>Players not in all games:</strong><br/>${notInAllGames.map(a=>a.name).join(', ')}</div>`;
-        }
-      }
-
-      document.getElementById('results').innerHTML = html;
+      resultsDiv.innerHTML = html;
     });
   </script>
 </body>
