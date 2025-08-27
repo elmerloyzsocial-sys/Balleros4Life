@@ -303,10 +303,14 @@
   <script>
     // --- EVENTS / TEAM GAMES TABLE ---
     const games = [
-      { date: '2025-08-22', opponent: 'Falcons', location: 'Home', result: null, ourScore: null, oppScore: null },
-      { date: '2025-08-29', opponent: 'Eagles', location: 'Away', result: null, ourScore: null, oppScore: null },
-      { date: '2025-08-15', opponent: 'Bulls', location: 'Away', result: 'Win', ourScore: 88, oppScore: 75 },
-      { date: '2025-08-08', opponent: 'Sharks', location: 'Home', result: 'Loss', ourScore: 65, oppScore: 70 }
+      // Add your upcoming schedules here:
+      { date: '2025-08-30', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
+      { date: '2025-08-31', opponent: 'PBAO Family Day', location: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
+      { date: '2025-09-13', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
+      // You can add more Saturday games like this:
+      { date: '2025-09-20', opponent: 'TBD', location: 'Home', result: null, ourScore: null, oppScore: null },
+      // Playoffs
+      { date: '2025-10-11', opponent: 'Playoffs', location: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
     ];
     function renderEventsTable() {
       const tbody = document.getElementById('eventsTableBody');
