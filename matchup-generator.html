@@ -40,25 +40,16 @@
     <div class="results" id="results"></div>
   </div>
   <script>
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
     document.getElementById('matchupForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const playerStr = document.getElementById('players').value;
       const numGames = parseInt(document.getElementById('games').value, 10);
 
-      // Parse and clean player names
+      // Parse and clean player names, keep original order for priority
       let players = playerStr.split(/[\n,]+/)
         .map(p => p.trim())
         .filter(p => p.length > 0);
 
-      // Minimum 1 game, minimum 1 player
       if (players.length === 0) {
         document.getElementById('results').innerHTML = "<div class='unassigned'>Please enter at least one player.</div>";
         return;
@@ -68,67 +59,66 @@
         return;
       }
 
-      // Distribute games per player as evenly as possible
+      // Game distribution (first come, first play)
       const totalSpots = numGames * 10;
       const numPlayers = players.length;
 
       // Each player gets at least Math.floor(totalSpots / numPlayers) games
       const minGamesPerPlayer = Math.floor(totalSpots / numPlayers);
-      const extraSpots = totalSpots % numPlayers; // Some players get an extra game
+      const extraSpots = totalSpots % numPlayers;
 
-      // Build an assignment array: for each player, how many games they get
+      // Priority assignment: top of the list gets extra games first
       let assignments = [];
       for (let i = 0; i < numPlayers; i++) {
         let count = minGamesPerPlayer + (i < extraSpots ? 1 : 0);
         assignments.push({ name: players[i], remaining: count, assigned: [] });
       }
 
-      // We want to fill numGames games with 10 players each
+      // Prepare gamesArr (only one game displayed, but all games for participation table)
       let gamesArr = Array.from({ length: numGames }, () => []);
-
-      // To avoid duplicates within the same game, we track which players are already in the game
-      // For fair distribution, shuffle players at each game
       for (let g = 0; g < numGames; g++) {
-        // Find all players who still have games left
-        let candidates = assignments.filter(a => a.remaining > 0);
+        // For each spot, choose eligible player who has remaining games, prioritizing earliest in list
         let usedNames = new Set();
-
-        // For each spot in the game
         for (let s = 0; s < 10; s++) {
-          // Pick a candidate not already in this game
-          let available = candidates.filter(a => !usedNames.has(a.name));
-          if (available.length === 0) {
-            // All candidates used up for this game, allow duplicates for this game (since requirement allows)
-            available = candidates;
+          // Find next eligible player not already in this game (by order)
+          let chosen = assignments.find(a => a.remaining > 0 && !usedNames.has(a.name));
+          if (!chosen) {
+            // If all players already assigned, allow duplicates (lowest index first)
+            chosen = assignments.find(a => a.remaining > 0);
           }
-          shuffle(available);
-          let chosen = available[0];
-          gamesArr[g].push(chosen.name);
-          chosen.remaining--;
-          chosen.assigned.push(g + 1);
-          usedNames.add(chosen.name);
+          if (!chosen) {
+            // If no one is left, fill with empty
+            gamesArr[g].push("(empty)");
+          } else {
+            gamesArr[g].push(chosen.name);
+            chosen.remaining--;
+            chosen.assigned.push(g + 1);
+            usedNames.add(chosen.name);
+          }
         }
       }
 
       // Prepare HTML output -- ONLY show the first game
       let html = `<div class="game">
-        <div class="game-title">Game 1 Matchup:</div>
+        <div class="game-title">Game 1 Matchup (Priority: Earliest players listed):</div>
         <ol>${gamesArr[0].map(p => `<li>${p}</li>`).join('')}</ol>
       </div>`;
 
-      // Player games played table
+      // Player games played table, sorted by original priority
       html += `<table>
-        <caption>Player Participation</caption>
+        <caption>Player Participation (First come, first play priority)</caption>
         <thead>
           <tr>
+            <th>Priority</th>
             <th>Player Name</th>
             <th>Games Played</th>
             <th>Game Numbers</th>
           </tr>
         </thead>
         <tbody>
-        ${assignments.map(a => `
+        ${assignments.map((a, i) => `
           <tr>
+            <td>${i + 1}</td>
             <td>${a.name}</td>
             <td>${a.assigned.length}</td>
             <td>${a.assigned.join(', ')}</td>
