@@ -1,0 +1,4 @@
+drop sounds here i.e function playBuzzer() {
+    const audio = new Audio('sound/buzzer.mp3');
+    audio.play();
+}
