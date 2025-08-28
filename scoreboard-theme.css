@@ -120,11 +120,11 @@ button:hover {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
-        gap: 6px;
+        gap: 5px;
     }
 
     #scoreboard {
-        gap: 5px;
+        gap: 4px;
     }
 
     button {
