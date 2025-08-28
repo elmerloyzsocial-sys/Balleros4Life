@@ -109,7 +109,7 @@ button:hover {
 /* Responsive Layout */
 @media (max-width: 600px) {
     h1 {
-        flex-direction: column;
+        flex-direction: row; /* default column */
         align-items: flex-start;
         font-size: 1em;
         padding: 6px 8px;
