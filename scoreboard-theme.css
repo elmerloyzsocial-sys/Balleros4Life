@@ -1,7 +1,7 @@
 /* Reset & Base Styles */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
 }
@@ -13,23 +13,22 @@ h1 {
     left: 0;
     width: 100%;
     background-color: #fff;
-    padding: 6px 10px; /* Reduced header padding */
+    padding: 6px 8px;
     margin: 0;
-    z-index: 2000; /* default 1000 */
+    z-index: 2000;
     border-bottom: 1px solid #ddd;
-    font-size: 1.15em; /* Slightly smaller font size */
+    font-size: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    min-height: 22px; /* Make header height smaller, default 44px */
+    min-height: 36px;
     box-sizing: border-box;
 }
 
-/* Timer & Scoreboard Container */
+/* Header Tools: Timer & Scoreboard */
 #header-tools {
     display: flex;
-    gap: 7px; /* Reduce gap default 14px */
+    gap: 12px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -37,21 +36,25 @@ h1 {
 /* Timer Section */
 #timer-section {
     display: flex;
-    gap: 3px; /* Reduce gap default 6px */
+    gap: 5px;
     align-items: center;
     flex-wrap: wrap;
 }
 
 #timer-section input[type="number"] {
-    width: 18px; /* Smaller input fields default 36px */
-    padding: 2px 4px;
-    font-size: 0.85em;
+    width: 34px;
+    padding: 2px 3px;
+    font-size: 0.95em;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    text-align: center;
 }
 
 /* Scoreboard Section */
 #scoreboard {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -61,67 +64,142 @@ h1 {
     font-size: 0.95em;
 }
 
+#scoreboard button {
+    padding: 2px 8px;
+    font-size: 0.85em;
+    min-width: 30px;
+    min-height: 26px;
+    border-radius: 3px;
+}
+
 /* Buttons */
 button {
-    padding: 3px 8px; /* Smaller buttons */
-    font-size: 0.8em; /* Smaller font */
+    padding: 6px 10px;
+    font-size: 0.88em;
     border: none;
     background-color: #0078d4;
     color: white;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
-    min-width: 56px; /* Minimum width for touch targets */
-    min-height: 32px; /* Minimum height for touch targets */
+    min-width: 44px;
+    min-height: 28px;
     box-sizing: border-box;
-    transition: background 0.2s;
+    transition: background 0.18s;
+    outline: none;
 }
 
-button:hover {
+button:hover,
+button:focus {
     background-color: #005fa3;
+}
+
+.remove-btn, .delete-game-btn {
+    background-color: #dc3545;
+    padding: 4px 7px;
+    font-size: 0.8em;
+    min-width: 28px;
+    min-height: 24px;
+    border-radius: 2px;
+    margin-left: 4px;
+}
+
+.remove-btn:hover, .delete-game-btn:hover {
+    background-color: #c82333;
 }
 
 /* Main Content Padding */
 .container {
-    padding-top: 54px; /* Adjusted for fixed header height */
+    padding-top: 48px;
 }
 
-/* Responsive Layout */
+/* Responsive Styles */
+@media (max-width: 900px) {
+    h1 {
+        font-size: 0.95em;
+        padding: 5px 6px;
+        min-height: 32px;
+    }
+    #header-tools {
+        gap: 8px;
+    }
+}
+
 @media (max-width: 600px) {
     h1 {
         flex-direction: column;
-        align-items: flex-start;
-        font-size: 1em; /* Even smaller font for mobile */
-        padding: 4px 6px; /* More compact padding */
-        min-height: 38px;
+        align-items: stretch;
+        font-size: 0.9em;
+        padding: 4px 4px;
+        min-height: 28px;
     }
 
     #header-tools {
         flex-direction: row;
-        flex-wrap: wrap;
+        gap: 5px;
         align-items: center;
-        gap: 4px;  /* default gap is 8px */
+        flex-wrap: wrap;
     }
 
     #scoreboard {
         gap: 3px;
     }
 
-    button {
-        padding: 2px 6px;
+    #scoreboard button,
+    #timer-section button {
+        padding: 2px 5px;
         font-size: 0.75em;
-        min-width: 44px;
-        min-height: 28px;
-		margin-right: 4px; /* ← reduce or remove */
+        min-width: 28px;
+        min-height: 22px;
+        border-radius: 2px;
     }
 
     #timer-section input[type="number"] {
-        width: 30px;
+        width: 24px;
         font-size: 0.75em;
-		gap: 4px; /* ← reduce this. Default gap is 8px */
+        padding: 1px 2px;
     }
 
-    /* Main Content Padding */
     .container {
-        padding-top: 44px; /* Smaller padding for mobile header */
+        padding-top: 36px;
+    }
+}
+
+/* Extra Small Devices (side by side, even smaller buttons) */
+@media (max-width: 420px) {
+    h1 {
+        font-size: 0.86em;
+        padding: 2px 2px;
+        min-height: 22px;
+    }
+
+    #header-tools {
+        gap: 4px;
+    }
+
+    #scoreboard button,
+    #timer-section button {
+        padding: 1px 4px;
+        font-size: 0.7em;
+        min-width: 22px;
+        min-height: 18px;
+    }
+
+    #timer-section input[type="number"] {
+        width: 18px;
+        font-size: 0.7em;
+        padding: 1px 1px;
+    }
+}
+
+/* Side by Side for Scoreboard & Timer */
+#scoreboard, #timer-section {
+    flex-direction: row;
+}
+
+/* Hide focus outline for buttons on mobile */
+@media (pointer: coarse) {
+    button:focus {
+        outline: none;
+        box-shadow: none;
     }
 }
