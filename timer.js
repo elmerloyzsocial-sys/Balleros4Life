@@ -43,9 +43,13 @@ function resetTimer() {
 }
 
 function playBuzzer() {
-    const audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+    const audio = new Audio('sound/buzzer.mp3');
     audio.play();
 }
+/* function playBuzzer() {
+    const audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+    audio.play();
+} */
 
 function updateScore(team, change) {
     if (team === 'A') {
