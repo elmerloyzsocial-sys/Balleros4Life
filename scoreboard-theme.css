@@ -15,21 +15,21 @@ h1 {
     background-color: #fff;
     padding: 6px 10px; /* Reduced header padding */
     margin: 0;
-    z-index: 1000;
+    z-index: 2000; /* default 1000 */
     border-bottom: 1px solid #ddd;
     font-size: 1.15em; /* Slightly smaller font size */
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    min-height: 44px; /* Make header height smaller */
+    min-height: 22px; /* Make header height smaller, default 44px */
     box-sizing: border-box;
 }
 
 /* Timer & Scoreboard Container */
 #header-tools {
     display: flex;
-    gap: 14px; /* Reduce gap */
+    gap: 7px; /* Reduce gap default 14px */
     align-items: center;
     flex-wrap: wrap;
 }
@@ -37,13 +37,13 @@ h1 {
 /* Timer Section */
 #timer-section {
     display: flex;
-    gap: 6px; /* Reduce gap */
+    gap: 3px; /* Reduce gap default 6px */
     align-items: center;
     flex-wrap: wrap;
 }
 
 #timer-section input[type="number"] {
-    width: 36px; /* Smaller input fields */
+    width: 18px; /* Smaller input fields default 36px */
     padding: 2px 4px;
     font-size: 0.85em;
 }
