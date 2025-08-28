@@ -132,6 +132,7 @@ button:hover {
         font-size: 0.82em;
         min-width: 48px;
         min-height: 28px;
+		width: 25%;
     }
 
     #timer-section input[type="number"] {
