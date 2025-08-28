@@ -136,12 +136,12 @@ button:hover {
     }
 
     #timer-section input[type="number"] {
-        width: 32px;
-        font-size: 0.8em;
+        width: 30px; /* default 32px */
+        font-size: 0.75em; /* default 0.8em */
     }
 
     .container {
-        padding-top: 48px;
+        padding-top: 44px; /* default 48px */
     }
 }
 
