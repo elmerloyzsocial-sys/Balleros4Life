@@ -113,7 +113,7 @@ button:hover {
         align-items: flex-start;
         font-size: 1em;
         padding: 6px 8px;
-        min-height: 38px;
+        min-height: 28px; /* default 38px */
     }
 
     #header-tools {
