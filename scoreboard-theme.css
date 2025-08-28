@@ -12,23 +12,25 @@ h1 {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fff;
-    padding: 6px 8px;
+    background: linear-gradient(90deg, #fff 85%, #e6f0fa 100%);
+    padding: 8px 16px;
     margin: 0;
-    z-index: 2000;
-    border-bottom: 1px solid #ddd;
-    font-size: 1em;
+    z-index: 1000;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 1.25em;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 36px;
+    flex-wrap: wrap;
+    min-height: 48px;
     box-sizing: border-box;
+    transition: background 0.3s;
 }
 
-/* Header Tools: Timer & Scoreboard */
+/* Header Tools Layout */
 #header-tools {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -36,240 +38,113 @@ h1 {
 /* Timer Section */
 #timer-section {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     align-items: center;
     flex-wrap: wrap;
 }
 
 #timer-section input[type="number"] {
-    width: 34px;
-    padding: 2px 3px;
+    width: 40px;
+    padding: 3px 6px;
     font-size: 0.95em;
     border-radius: 3px;
-    border: 1px solid #ddd;
-    background: #f7f7f7;
-    text-align: center;
+    border: 1px solid #d0d7de;
+    background: #f7fbff;
+    transition: border-color 0.2s;
+}
+
+#timer-section input[type="number"]:focus {
+    border-color: #0078d4;
+    outline: none;
 }
 
 /* Scoreboard Section */
 #scoreboard {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
     flex-wrap: wrap;
 }
 
 #scoreboard span {
-    font-weight: bold;
-    font-size: 0.95em;
-}
-
-#scoreboard button {
-    padding: 2px 8px;
-    font-size: 0.85em;
-    min-width: 30px;
-    min-height: 26px;
-    border-radius: 3px;
+    font-weight: 600;
+    font-size: 1em;
+    color: #0078d4;
+    letter-spacing: 0.02em;
 }
 
 /* Buttons */
 button {
-    padding: 6px 10px;
-    font-size: 0.88em;
+    padding: 5px 12px;
+    font-size: 0.92em;
     border: none;
-    background-color: #0078d4;
-    color: white;
-    border-radius: 3px;
+    background: linear-gradient(90deg, #0078d4 80%, #005fa3 100%);
+    color: #fff;
+    border-radius: 5px;
     cursor: pointer;
-    min-width: 44px;
-    min-height: 28px;
-    box-sizing: border-box;
-    transition: background 0.18s;
-    outline: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
-button:hover,
+button:active {
+    transform: scale(0.98);
+}
+
 button:focus {
-    background-color: #005fa3;
+    outline: 2px solid #005fa3;
+    outline-offset: 1px;
 }
 
-.remove-btn, .delete-game-btn {
-    background-color: #dc3545;
-    padding: 4px 7px;
-    font-size: 0.8em;
-    min-width: 28px;
-    min-height: 24px;
-    border-radius: 2px;
-    margin-left: 4px;
-}
-
-.remove-btn:hover, .delete-game-btn:hover {
-    background-color: #c82333;
+button:hover {
+    background: linear-gradient(90deg, #005fa3 70%, #0078d4 100%);
+    box-shadow: 0 2px 6px rgba(0,120,212,0.12);
 }
 
 /* Main Content Padding */
 .container {
-    padding-top: 48px;
+    padding-top: 60px;
+    transition: padding-top 0.3s;
 }
 
-/* Responsive Styles */
-@media (max-width: 900px) {
-    h1 {
-        font-size: 0.95em;
-        padding: 5px 6px;
-        min-height: 32px;
-    }
-    #header-tools {
-        gap: 8px;
-    }
-}
-
-/* --- MOBILE / PORTRAIT MODE --- */
-@media (max-width: 600px) and (orientation: portrait) {
+/* Responsive Layout */
+@media (max-width: 600px) {
     h1 {
         flex-direction: column;
-        align-items: stretch;
-        font-size: 0.9em;
-        padding: 4px 4px;
-        min-height: 28px;
+        align-items: flex-start;
+        font-size: 1em;
+        padding: 6px 8px;
+        min-height: 38px;
     }
 
     #header-tools {
-        flex-direction: column;
-        gap: 10px;
-        align-items: stretch;
-        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
     }
 
-    #timer-section,
     #scoreboard {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 6px;
-        justify-content: flex-start;
-        width: 100%;
-        margin-bottom: 2px;
+        gap: 5px;
     }
 
-    #scoreboard span {
-        min-width: 70px;
-        font-size: 0.9em;
-    }
-
-    #scoreboard button,
-    #timer-section button {
+    button {
         padding: 3px 8px;
-        font-size: 0.8em;
-        min-width: 42px;
+        font-size: 0.82em;
+        min-width: 48px;
         min-height: 28px;
-        border-radius: 2px;
-        margin: 2px 2px 2px 0;
-        width: auto;
-        display: inline-block;
     }
 
     #timer-section input[type="number"] {
-        width: 26px;
+        width: 32px;
         font-size: 0.8em;
-        padding: 2px 2px;
-        margin-right: 2px;
     }
 
     .container {
-        padding-top: 38px;
-        margin: 0 2px;
-    }
-
-    .section {
-        padding: 8px 4px;
-    }
-
-    /* Player/Game Buttons: stack vertically, full width, smaller gap */
-    .game-actions {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 6px;
-        justify-content: flex-start;
-    }
-    .game-actions button, .game-actions select {
-        font-size: 0.78em;
-        padding: 4px 8px;
-        min-width: 36px;
-        min-height: 26px;
-        border-radius: 2px;
-        margin-bottom: 2px;
-        width: auto;
-    }
-    .remove-btn, .delete-game-btn {
-        font-size: 0.75em;
-        padding: 3px 5px;
-        min-width: 24px;
-        min-height: 20px;
-        margin-left: 2px;
-    }
-    select {
-        font-size: 0.78em;
-        padding: 4px;
-        min-width: 60px;
-        border-radius: 2px;
-        margin-bottom: 2px;
-    }
-    input[type="text"] {
-        font-size: 0.8em;
-        padding: 5px;
-        min-width: 64px;
-        border-radius: 2px;
-        margin-bottom: 5px;
-    }
-    ul {
-        padding-left: 0;
-    }
-    li {
-        font-size: 0.85em;
-        padding: 6px 2px;
+        padding-top: 48px;
     }
 }
 
-/* Extra Small Devices (side by side, even smaller buttons) */
-@media (max-width: 420px) and (orientation: portrait) {
-    h1 {
-        font-size: 0.86em;
-        padding: 2px 2px;
-        min-height: 22px;
-    }
-
-    #header-tools {
-        gap: 6px;
-        padding: 0;
-    }
-    #scoreboard button,
-    #timer-section button,
-    .game-actions button,
-    .game-actions select {
-        padding: 2px 4px;
-        font-size: 0.7em;
-        min-width: 22px;
-        min-height: 17px;
-        border-radius: 2px;
-    }
-    #timer-section input[type="number"] {
-        width: 16px;
-        font-size: 0.7em;
-        padding: 1px 1px;
-    }
-    .container {
-        padding-top: 24px;
-        margin: 0 1px;
-    }
-    .section {
-        padding: 4px 2px;
-    }
-}
-
-/* Hide focus outline for buttons on mobile */
-@media (pointer: coarse) {
-    button:focus {
-        outline: none;
-        box-shadow: none;
-    }
+/* Utility: Smooth transitions for interactive elements */
+button, input[type="number"], h1, .container {
+    transition: all 0.2s;
 }
