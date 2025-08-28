@@ -124,7 +124,8 @@ button:focus {
     }
 }
 
-@media (max-width: 600px) {
+/* --- MOBILE / PORTRAIT MODE --- */
+@media (max-width: 600px) and (orientation: portrait) {
     h1 {
         flex-direction: column;
         align-items: stretch;
@@ -134,38 +135,103 @@ button:focus {
     }
 
     #header-tools {
-        flex-direction: row;
-        gap: 5px;
-        align-items: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+        width: 100%;
     }
 
+    #timer-section,
     #scoreboard {
-        gap: 3px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-start;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+
+    #scoreboard span {
+        min-width: 70px;
+        font-size: 0.9em;
     }
 
     #scoreboard button,
     #timer-section button {
-        padding: 2px 5px;
-        font-size: 0.75em;
-        min-width: 28px;
-        min-height: 22px;
+        padding: 3px 8px;
+        font-size: 0.8em;
+        min-width: 42px;
+        min-height: 28px;
         border-radius: 2px;
+        margin: 2px 2px 2px 0;
+        width: auto;
+        display: inline-block;
     }
 
     #timer-section input[type="number"] {
-        width: 24px;
-        font-size: 0.75em;
-        padding: 1px 2px;
+        width: 26px;
+        font-size: 0.8em;
+        padding: 2px 2px;
+        margin-right: 2px;
     }
 
     .container {
-        padding-top: 36px;
+        padding-top: 38px;
+        margin: 0 2px;
+    }
+
+    .section {
+        padding: 8px 4px;
+    }
+
+    /* Player/Game Buttons: stack vertically, full width, smaller gap */
+    .game-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    .game-actions button, .game-actions select {
+        font-size: 0.78em;
+        padding: 4px 8px;
+        min-width: 36px;
+        min-height: 26px;
+        border-radius: 2px;
+        margin-bottom: 2px;
+        width: auto;
+    }
+    .remove-btn, .delete-game-btn {
+        font-size: 0.75em;
+        padding: 3px 5px;
+        min-width: 24px;
+        min-height: 20px;
+        margin-left: 2px;
+    }
+    select {
+        font-size: 0.78em;
+        padding: 4px;
+        min-width: 60px;
+        border-radius: 2px;
+        margin-bottom: 2px;
+    }
+    input[type="text"] {
+        font-size: 0.8em;
+        padding: 5px;
+        min-width: 64px;
+        border-radius: 2px;
+        margin-bottom: 5px;
+    }
+    ul {
+        padding-left: 0;
+    }
+    li {
+        font-size: 0.85em;
+        padding: 6px 2px;
     }
 }
 
 /* Extra Small Devices (side by side, even smaller buttons) */
-@media (max-width: 420px) {
+@media (max-width: 420px) and (orientation: portrait) {
     h1 {
         font-size: 0.86em;
         padding: 2px 2px;
@@ -173,27 +239,31 @@ button:focus {
     }
 
     #header-tools {
-        gap: 4px;
+        gap: 6px;
+        padding: 0;
     }
-
     #scoreboard button,
-    #timer-section button {
-        padding: 1px 4px;
+    #timer-section button,
+    .game-actions button,
+    .game-actions select {
+        padding: 2px 4px;
         font-size: 0.7em;
         min-width: 22px;
-        min-height: 18px;
+        min-height: 17px;
+        border-radius: 2px;
     }
-
     #timer-section input[type="number"] {
-        width: 18px;
+        width: 16px;
         font-size: 0.7em;
         padding: 1px 1px;
     }
-}
-
-/* Side by Side for Scoreboard & Timer */
-#scoreboard, #timer-section {
-    flex-direction: row;
+    .container {
+        padding-top: 24px;
+        margin: 0 1px;
+    }
+    .section {
+        padding: 4px 2px;
+    }
 }
 
 /* Hide focus outline for buttons on mobile */
