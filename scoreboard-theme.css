@@ -99,7 +99,7 @@ button:hover {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
-        gap: 8px;
+        gap: 4px;  /* default gap is 8px */
     }
 
     #scoreboard {
@@ -111,11 +111,13 @@ button:hover {
         font-size: 0.75em;
         min-width: 44px;
         min-height: 28px;
+		margin-right: 4px; /* ← reduce or remove */
     }
 
     #timer-section input[type="number"] {
         width: 30px;
         font-size: 0.75em;
+		gap: 4px; /* ← reduce this. Default gap is 8px */
     }
 
     /* Main Content Padding */
