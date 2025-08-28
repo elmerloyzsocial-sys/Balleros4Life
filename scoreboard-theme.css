@@ -124,14 +124,14 @@ button:hover {
     }
 
     #scoreboard {
-        gap: 3px;
+        gap: 2px; /* default 3px */
     }
 
     button {
-        padding: 3px 8px;
-        font-size: 0.82em;
-        min-width: 48px;
-        min-height: 28px;
+        padding: 2px 6px; /* default 3px 8px */
+        font-size: 0.75em; /* default 0.82em */
+        min-width: 44px; /* default 48px */
+        min-height: 28px; /* default 28px */
 		width: 25%;
     }
 
