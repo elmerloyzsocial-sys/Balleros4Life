@@ -95,4 +95,9 @@ button:hover {
     button {
         width: 100%;
     }
+
+    /* Main Content Padding */
+.container {
+    padding-top: 580px; /* Adjusted for fixed header height */
+    }
 }
