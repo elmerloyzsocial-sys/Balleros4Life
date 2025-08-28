@@ -1,136 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Basketball Matchup Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial, sans-serif; background: #f7f7fa; margin: 0; padding: 0; }
-    .container { max-width: 500px; margin: 2em auto; background: #fff; padding: 2em 1.5em; border-radius: 10px; box-shadow: 0 2px 12px #aaa2; }
-    h1 { text-align: center; color: #263238; }
-    label { font-weight: 600; margin-top: 1em; display: block; }
-    textarea, input[type=number] { width: 100%; padding: 0.6em 0.7em; border-radius: 6px; border: 1px solid #e5e5e5; margin-top: 0.4em; box-sizing: border-box; font-size: 1.05em; }
-    button { background: #f7b32b; color: #222; font-weight: bold; border: none; border-radius: 6px; padding: 0.7em 1.5em; font-size: 1.08em; margin-top: 1em; cursor: pointer; }
-    .results { margin-top: 2em; }
-    .game { background: #f7f7fa; border-radius: 8px; margin-bottom: 1em; padding: 1em 1em; border: 1px solid #e5e5e5; }
-    .game-title { color: #263238; font-size: 1.06em; font-weight: 600; margin-bottom: 0.5em; }
-    .unassigned, .notice { color: #d32f2f; margin-top: 1em; padding: 0.8em; background: #fff3f3; border-radius: 6px; border: 1px solid #ffc3c3; }
-    .notice { color: #f57c00; background: #fffbe9; border-color: #ffe0b2; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1.5em; background: #f9f9fc; border-radius: 8px; overflow: hidden; }
-    th, td { padding: 0.6em 0.8em; border: 1px solid #e5e5e5; text-align: left; }
-    th { background: #f7b32b; color: #222; }
-    td { background: #fff; }
-    caption { text-align: left; font-weight: bold; font-size: 1.08em; margin-bottom: 0.4em; color: #263238; }
-    @media (max-width: 600px) {
-      .container { max-width: 99vw; padding: 1em 0.3em; }
-      table, th, td { font-size: 0.98em; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBall Matchup List</title>
+	<link rel="stylesheet" href="scoreboard-theme.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            font-size: 16px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .left-column {
+            width: 100%;
+            max-width: 700px;
+        }
+        .right-column {
+            width: 100%;
+            max-width: 300px;
+            padding-top: 20px;
+        }
+        .section {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .section input.title {
+            font-size: 1.2em;
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .counter {
+            background-color: #eee;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            max-width: 200px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .remove-btn, .delete-game-btn {
+            background-color: #dc3545;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            max-width: 100px;
+        }
+        .remove-btn:hover, .delete-game-btn:hover {
+            background-color: #c82333;
+        }
+        select {
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 200px;
+            border-radius: 3px;
+        }
+        .game-player {
+            display: flex;
+            align-items: center;
+        }
+        .game-player input[type="checkbox"] {
+            margin-left: 10px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .game-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        @media screen and (min-width: 768px) {
+            .left-column {
+                width: 70%;
+            }
+            .right-column {
+                width: 25%;
+            }
+            button, select {
+                width: auto;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            body {
+                margin: 10px;
+                font-size: 14px;
+            }
+            .section {
+                padding: 10px;
+            }
+            button, select, input[type="text"] {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+            .container {
+                flex-direction: column;
+            }
+            .remove-btn, .delete-game-btn {
+                font-size: 0.7em;
+                padding: 4px 8px;
+            }
+        }
+        @media print {
+            .no-print {
+                display: none;
+            }
+            .left-column {
+                width: 100%;
+            }
+            .right-column {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Basketball Matchup Generator</h1>
-    <form id="matchupForm" autocomplete="off">
-      <label for="players">List of Players (comma or line separated):</label>
-      <textarea id="players" rows="5" placeholder="e.g. John, Mike, Sarah, ..."></textarea>
-      <label for="games">Number of Games:</label>
-      <input type="number" id="games" min="1" max="99" value="1" />
-      <button type="submit">Generate Matchups</button>
-    </form>
-    <div class="results" id="results"></div>
-  </div>
-  <script>
-    document.getElementById('matchupForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const playerStr = document.getElementById('players').value;
-      const numGames = parseInt(document.getElementById('games').value, 10);
+    <h1 style="display: flex; justify-content: space-between; align-items: center;">
+		Bball Matchups
 
-      // Parse and clean player names, keep original order for FIFO
-      let players = playerStr.split(/[\n,]+/)
-        .map(p => p.trim())
-        .filter(p => p.length > 0);
+		<div id="header-tools" style="display: flex; gap: 20px; align-items: center;">
+        
+			<!-- ⏱ Timer Section -->
+			<div id="timer-section">
+				<input type="number" id="timer-minutes" value="10" min="0"> min
+				<input type="number" id="timer-seconds" value="0" min="0" max="59"> sec
+				<span id="timer-display">01:00</span>
+				<button onclick="startTimer()">Start</button>
+				<button onclick="stopTimer()">Stop</button>
+				<button onclick="resetTimer()">Reset</button>
+			</div>
 
-      if (players.length === 0) {
-        document.getElementById('results').innerHTML = "<div class='unassigned'>Please enter at least one player.</div>";
-        return;
-      }
-      if (numGames < 1) {
-        document.getElementById('results').innerHTML = "<div class='unassigned'>Number of games must be at least 1.</div>";
-        return;
-      }
+			<!-- 🏀 Scoreboard Section -->
+			<div id="scoreboard">
+				<span>Team A: <span id="scoreA">0</span></span>
+				<button onclick="updateScore('A', 1)">+1</button>
+				<button onclick="updateScore('A', -1)">-1</button>
+				&nbsp;&nbsp;
+				<span>Team B: <span id="scoreB">0</span></span>
+				<button onclick="updateScore('B', 1)">+1</button>
+				<button onclick="updateScore('B', -1)">-1</button>
+			</div>
+		</div>
+	</h1>
+    <div class="container">
+        <div class="left-column">
+            <div id="player-list" class="section">
+                <input type="text" class="title" value="List of players" onblur="saveData()">
+                <ul id="players"></ul>
+                <input type="text" id="new-player" placeholder="Add new player" class="no-print">
+                <button onclick="addPlayer()" class="no-print">Add Player</button>
+				<button onclick="clearPlayers()">Clear All Players</button>
+            </div>
+            <div id="games"></div>
+				<button onclick="addGame()" class="no-print">Add New Game</button>
+            <div>
+			<div contenteditable="true" onblur="updateGameTitle(1, this.innerText)">Game 1, Court 1</div>
+        <div class="right-column">
+            <button onclick="printGames()">Print Games Data</button>			
+        </div>
+    </div>
 
-      // FIFO game generation
-      let gamesArr = [];
-      let assignments = players.map(p => ({ name: p, assigned: [] }));
+    <script>
+        let players = [];
+        let games = [];
+        let playerId = 1;
 
-      for (let g = 0; g < numGames; g++) {
-        let matchup = [];
-        let startIdx = (players.length > 10) ? g : (g % players.length);
-        // First, check if there are enough players to fill a game without cycling
-        if (players.length >= 10) {
-          // If more than 10 players, always take the next 10 in order (FIFO window)
-          // If window exceeds array, just cycle at the end
-          if (players.length > 10 && startIdx + 10 <= players.length) {
-            matchup = players.slice(startIdx, startIdx + 10);
-          } else if (players.length > 10) {
-            // wrap around for window
-            let toEnd = players.slice(startIdx);
-            let fromStart = players.slice(0, 10 - toEnd.length);
-            matchup = toEnd.concat(fromStart);
-          } else {
-            // Exactly 10 players, always use all
-            matchup = players.slice(0, 10);
-          }
-        } else {
-          // Less than 10 players, cycle through
-          for (let i = 0; i < 10; i++) {
-            matchup.push(players[(startIdx + i) % players.length]);
-          }
+        function loadData() {
+            try {
+                const savedData = localStorage.getItem('basketballManager');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    players = data.players || [];
+                    games = data.games || [];
+                    playerId = data.playerId || 1;
+                }
+                renderPlayers();
+                renderGames();
+            } catch (e) {
+                console.error('Error loading data from localStorage:', e);
+            }
         }
-        gamesArr.push(matchup);
 
-        // Mark assignments for participation table
-        matchup.forEach(p => {
-          let playerObj = assignments.find(a => a.name === p);
-          if (playerObj) playerObj.assigned.push(g + 1);
-        });
-      }
+        function saveData() {
+            try {
+                const data = { players, games, playerId };
+                localStorage.setItem('basketballManager', JSON.stringify(data));
+            } catch (e) {
+                console.error('Error saving data to localStorage:', e);
+            }
+        }
 
-      // Prepare HTML output: show all games with FIFO order
-      let html = "";
-      gamesArr.forEach((gamePlayers, idx) => {
-        html += `<div class="game">
-          <div class="game-title">Game ${idx + 1} Matchup (FIFO):</div>
-          <ol>${gamePlayers.map(p => `<li>${p}</li>`).join('')}</ol>
-        </div>`;
-      });
+        function addPlayer() {
+            const nameInput = document.getElementById('new-player');
+            const name = nameInput.value.trim();
+            if (name) {
+                players.push({ id: playerId++, name, gamesPlayed: 0 });
+                nameInput.value = '';
+                renderPlayers();
+                saveData();
+            }
+        }
+		
+		function clearPlayers() {
+				players = [];
+				document.getElementById('players').innerHTML = '';
+				saveData();
+		}
 
-      // Player games played table, sorted by input order
-      html += `<table>
-        <caption>Player Participation (First come, first play priority)</caption>
-        <thead>
-          <tr>
-            <th>Priority</th>
-            <th>Player Name</th>
-            <th>Games Played</th>
-            <th>Game Numbers</th>
-          </tr>
-        </thead>
-        <tbody>
-        ${assignments.map((a, i) => `
-          <tr>
-            <td>${i + 1}</td>
-            <td>${a.name}</td>
-            <td>${a.assigned.length}</td>
-            <td>${a.assigned.join(', ')}</td>
-          </tr>
-        `).join('')}
-        </tbody>
-      </table>`;
+        function renderPlayers() {
+            const ul = document.getElementById('players');
+            ul.innerHTML = '';
+            players.forEach((player, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${index + 1}. ${player.name} <span class="counter">${player.gamesPlayed}</span>`;
+                ul.appendChild(li);
+            });
+            updateAllSelects();
+        }
 
-      document.getElementById('results').innerHTML = html;
-    });
-  </script>
-  <p><a href="index.html">Back to Home</a></p>
+        function addGame() {
+            const gameNumber = games.length + 1;
+            const newGame = { id: gameNumber, title: `Game ${gameNumber}, Court 1`, players: [], marked: false };
+            // Add all players from the player list
+				newGame.players = players.map(player => player.id);
+				games.push(newGame);
+				renderGames();
+				saveData();
+        }
+
+        function deleteGame(gameId) {
+            games = games.filter(game => game.id !== gameId);
+            renderGames();
+            saveData();
+        }
+
+        function renderGames() {
+            const container = document.getElementById('games');
+            container.innerHTML = '';
+            games.forEach(game => {
+                const div = document.createElement('div');
+                div.className = 'section game';
+                div.innerHTML = `
+                    <input type="text" class="title" value="${game.title}" onblur="updateGameTitle(${game.id}, this.value)">
+                    <ul id="game-players-${game.id}"></ul>
+                    <div class="game-actions no-print">
+                        ${game.players.length < 10 && !game.marked ? `
+                            <select id="select-player-${game.id}"></select>
+                            <button onclick="addToGame(${game.id})">Add to Game</button>
+                        ` : ''}
+                        ${game.players.length === 10 && !game.marked ? `
+                            <button onclick="markPlayed(${game.id})">Mark Played</button>
+                        ` : ''}
+                        <button class="delete-game-btn" onclick="deleteGame(${game.id})">Delete Game</button>
+                    </div>
+                `;
+                container.appendChild(div);
+                renderGamePlayers(game);
+                updateSelect(game.id);
+            });
+        }
+
+        function updateGameTitle(gameId, newTitle) {
+            const game = games.find(g => g.id === gameId);
+            if (game) game.title = newTitle;
+            saveData();
+        }
+
+        function renderGamePlayers(game) {
+            const ul = document.getElementById(`game-players-${game.id}`);
+            ul.innerHTML = '';
+            game.players.forEach((playerId, index) => {
+                const player = players.find(p => p.id === playerId);
+                if (player) {
+                    const li = document.createElement('li');
+                    li.className = 'game-player';
+                    li.innerHTML = `${index + 1}. ${player.name}`;
+                    if (!game.marked) {
+                        li.innerHTML += `
+                            <input type="checkbox" checked class="no-print" onchange="togglePlay(${game.id}, ${playerId}, this.checked)">
+                            <button onclick="removePlayer(${game.id}, ${playerId})" class="remove-btn no-print">Remove</button>
+                        `;
+                    } else {
+                        li.innerHTML += ` <span>(Played)</span>`;
+                    }
+                    ul.appendChild(li);
+                }
+            });
+        }
+
+        function updateAllSelects() {
+            games.forEach(game => updateSelect(game.id));
+        }
+
+        function updateSelect(gameId) {
+            const select = document.getElementById(`select-player-${gameId}`);
+            if (select) {
+                select.innerHTML = '';
+                const option = document.createElement('option');
+                option.value = '';
+                option.text = 'Select player';
+                select.appendChild(option);
+                players.forEach(player => {
+                    if (!games.find(g => g.id === gameId).players.includes(player.id)) {
+                        const opt = document.createElement('option');
+                        opt.value = player.id;
+                        opt.text = player.name;
+                        select.appendChild(opt);
+                    }
+                });
+            }
+        }
+
+        function addToGame(gameId) {
+            const select = document.getElementById(`select-player-${gameId}`);
+            const playerId = parseInt(select.value);
+            if (playerId) {
+                const game = games.find(g => g.id === gameId);
+                if (game.players.length < 10) {
+                    game.players.push(playerId);
+                    renderGames();
+                    saveData();
+                }
+            }
+        }
+
+        function removePlayer(gameId, playerId) {
+            const game = games.find(g => g.id === gameId);
+            if (game && !game.marked) {
+                game.players = game.players.filter(id => id !== playerId);
+                renderGames();
+                saveData();
+            }
+        }
+
+        function markPlayed(gameId) {
+            const game = games.find(g => g.id === gameId);
+            if (game && !game.marked && game.players.length === 10) {
+                game.players.forEach(playerId => {
+                    const player = players.find(p => p.id === playerId);
+                    if (player) player.gamesPlayed++;
+                });
+                game.marked = true;
+                renderPlayers();
+                renderGames();
+                saveData();
+            }
+        }
+
+        function togglePlay(gameId, playerId, checked) {
+            // Optional: Can be used for custom logic if unchecking a player is needed.
+        }
+
+        function printGames() {
+            window.print();
+        }
+
+        // Initial load
+        loadData();
+        if (games.length === 0) addGame();
+    </script>
+	<script src="timer.js">
+	</script>
 </body>
 </html>
