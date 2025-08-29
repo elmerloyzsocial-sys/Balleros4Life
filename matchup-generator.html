@@ -257,7 +257,7 @@
             ul.innerHTML = '';
             players.forEach((player, index) => {
                 const li = document.createElement('li');
-                li.innerHTML = `${index + 1}. ${player.name} <span class="counter">${player.gamesPlayed}</span>`;
+                li.innerHTML = `${player.name} <span class="counter">${player.gamesPlayed}</span>`;
                 ul.appendChild(li);
             });
             updateAllSelects();
