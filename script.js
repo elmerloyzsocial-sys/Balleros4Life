@@ -2,14 +2,14 @@
 
 const games = [
   // Add your upcoming schedules here:
-  { date: '2025-08-30', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
-  { date: '2025-08-31', opponent: 'PBAO Family Day', location: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
-  { date: '2025-09-06', opponent: 'Henry's Harvest', location: '3:30PM', result: 'Event', ourScore: null, oppScore: null },
-  { date: '2025-09-13', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
+  { date: '2025-08-30', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
+  { date: '2025-08-31', opponent: 'PBAO Family Day', time: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
+  { date: '2025-09-06', opponent: "Henry's Harvest", time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
+  { date: '2025-09-13', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
   // You can add more Saturday games like this:
-  { date: '2025-09-20', opponent: 'TBD', location: 'Home', result: null, ourScore: null, oppScore: null },
+  { date: '2025-09-20', opponent: 'TBD', time: 'Home', result: null, ourScore: null, oppScore: null },
   // Playoffs
-  { date: '2025-10-11', opponent: 'Playoffs', location: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
+  { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
 ];
 
 const standing = [
@@ -17,7 +17,7 @@ const standing = [
   { name: 'World Remit', record: '6–2', pointDifferential: 45 },
   { name: 'Ted Fencing', record: '5–3', pointDifferential: 71 },
   { name: "Henry's Harvest", record: '5–3', pointDifferential: 54 },
-  { name: 'Hype Signs', record: '5–3', pointDifferential: 18 },
+  { name: 'Hype Signs', record: '5���3', pointDifferential: 18 },
   { name: 'Laserbond', record: '4–4', pointDifferential: 15 },
   { name: 'Elegance Eyewear', record: '4–3', pointDifferential: -4 },
   { name: 'Prime One', record: '4–4', pointDifferential: -5 },
@@ -115,21 +115,21 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('nextGame').innerHTML = upcoming ? `
       <b>Date:</b> ${upcoming.date}<br>
       <b>Opponent:</b> ${upcoming.opponent}<br>
-      <b>Location:</b> ${upcoming.location}
+      <b>Time:</b> ${upcoming.time}
     ` : 'No upcoming games.';
 
     // Standings
     let standingsHTML = `<table><tr><th>Team</th><th>Record</th><th>Point Differential</th></tr>`;
-	standing.forEach(s => standingsHTML += `<tr><td>${s.name}</td><td>${s.record}</td><td>${s.pointDifferential}</td></tr>`);
-	standingsHTML += `</table>`;
-	document.getElementById('standingsTable').innerHTML = standingsHTML;
+    standing.forEach(s => standingsHTML += `<tr><td>${s.name}</td><td>${s.record}</td><td>${s.pointDifferential}</td></tr>`);
+    standingsHTML += `</table>`;
+    document.getElementById('standingsTable').innerHTML = standingsHTML;
 
     // Team Stats Table
     let teamStatsHTML = `<table>
       <tr>
         <th>Date</th>
         <th>Opponent</th>
-        <th>Location</th>
+        <th>Time</th>
         <th>Our Score</th>
         <th>Opponent Score</th>
         <th>Result</th>
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
       teamStatsHTML += `<tr>
         <td>${g.date}</td>
         <td>${g.opponent}</td>
-        <td>${g.location}</td>
+        <td>${g.time}</td>
         <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
         <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
         <td>${g.result ? g.result : 'Upcoming'}</td>
@@ -147,22 +147,22 @@ document.addEventListener("DOMContentLoaded", function() {
     teamStatsHTML += `</table>`;
     document.getElementById('teamStatsTable').innerHTML = teamStatsHTML;
 
-	// Events & Team Games Table
-	const eventsTableBody = document.getElementById('eventsTableBody');
-	if (eventsTableBody) {
-		eventsTableBody.innerHTML = games.map(g => `
-    <tr>
-      <td>${g.date}</td>
-      <td>${g.opponent}</td>
-      <td>${g.location}</td>
-      <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
-      <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
-      <td>${g.result ? g.result : 'Upcoming'}</td>
-    </tr>
-	`).join('');
-	}
+    // Events & Team Games Table
+    const eventsTableBody = document.getElementById('eventsTableBody');
+    if (eventsTableBody) {
+      eventsTableBody.innerHTML = games.map(g => `
+        <tr>
+          <td>${g.date}</td>
+          <td>${g.opponent}</td>
+          <td>${g.time}</td>
+          <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
+          <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
+          <td>${g.result ? g.result : 'Upcoming'}</td>
+        </tr>
+      `).join('');
+    }
     
-	// Gallery preview (uses GitHub API, shows first 3 images)
+    // Gallery preview (uses GitHub API, shows first 3 images)
     const galleryPreviewDiv = document.getElementById('galleryPreview');
     if (galleryPreviewDiv) {
       const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <tr>
         <th>Date</th>
         <th>Opponent</th>
-        <th>Location</th>
+        <th>Time</th>
         <th>Our Score</th>
         <th>Opponent Score</th>
         <th>Result</th>
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function() {
       teamStatsHTML += `<tr>
         <td>${g.date}</td>
         <td>${g.opponent}</td>
-        <td>${g.location}</td>
+        <td>${g.time}</td>
         <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
         <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
         <td>${g.result ? g.result : 'Upcoming'}</td>
@@ -356,12 +356,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Calendar page
   if (document.getElementById('gameCalendar')) {
     let calHTML = `<table>
-      <tr><th>Date</th><th>Opponent</th><th>Location</th><th>Result</th></tr>`;
+      <tr><th>Date</th><th>Opponent</th><th>Time</th><th>Result</th></tr>`;
     games.forEach(g => {
       calHTML += `<tr>
         <td>${g.date}</td>
         <td>${g.opponent}</td>
-        <td>${g.location}</td>
+        <td>${g.time}</td>
         <td>${g.result ? g.result : 'Upcoming'}</td>
       </tr>`;
     });
