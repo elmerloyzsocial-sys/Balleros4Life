@@ -147,7 +147,22 @@ document.addEventListener("DOMContentLoaded", function() {
     teamStatsHTML += `</table>`;
     document.getElementById('teamStatsTable').innerHTML = teamStatsHTML;
 
-    // Gallery preview (uses GitHub API, shows first 3 images)
+	// Events & Team Games Table
+	const eventsTableBody = document.getElementById('eventsTableBody');
+	if (eventsTableBody) {
+		eventsTableBody.innerHTML = games.map(g => `
+    <tr>
+      <td>${g.date}</td>
+      <td>${g.opponent}</td>
+      <td>${g.location}</td>
+      <td>${g.ourScore !== null ? g.ourScore : '-'}</td>
+      <td>${g.oppScore !== null ? g.oppScore : '-'}</td>
+      <td>${g.result ? g.result : 'Upcoming'}</td>
+    </tr>
+	`).join('');
+	}
+    
+	// Gallery preview (uses GitHub API, shows first 3 images)
     const galleryPreviewDiv = document.getElementById('galleryPreview');
     if (galleryPreviewDiv) {
       const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
