@@ -4,6 +4,7 @@ const games = [
   // Add your upcoming schedules here:
   { date: '2025-08-30', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
   { date: '2025-08-31', opponent: 'PBAO Family Day', location: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
+  { date: '2025-09-06', opponent: 'Henry's Harvest', location: '3:30PM', result: 'Event', ourScore: null, oppScore: null },
   { date: '2025-09-13', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
   // You can add more Saturday games like this:
   { date: '2025-09-20', opponent: 'TBD', location: 'Home', result: null, ourScore: null, oppScore: null },
