@@ -258,7 +258,7 @@
 					<tr>
 						<th style="min-width:90px;">Date</th>
 						<th style="min-width:90px;">Opponent</th>
-						<th style="min-width:90px;">Location</th>
+						<th style="min-width:90px;">Time</th>
 						<th style="min-width:70px;">Our Score</th>
 						<th style="min-width:100px;">Opponent Score</th>
 						<th style="min-width:80px;">Result</th>
@@ -317,13 +317,14 @@
     // --- EVENTS / TEAM GAMES TABLE ---
     const games = [
       // Add your upcoming schedules here:
-      { date: '2025-08-30', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
-      { date: '2025-08-31', opponent: 'PBAO Family Day', location: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
-      { date: '2025-09-13', opponent: 'No games', location: '-', result: 'Rest', ourScore: null, oppScore: null },
+      { date: '2025-08-30', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
+      { date: '2025-08-31', opponent: 'PBAO Family Day', time: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
+      { date: '2025-09-06', opponent: 'Henry's Harvest', time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
+      { date: '2025-09-13', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
       // You can add more Saturday games like this:
-      { date: '2025-09-20', opponent: 'TBD', location: 'Home', result: null, ourScore: null, oppScore: null },
+      { date: '2025-09-20', opponent: 'TBD', time: 'Home', result: null, ourScore: null, oppScore: null },
       // Playoffs
-      { date: '2025-10-11', opponent: 'Playoffs', location: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
+      { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
     ];
     function renderEventsTable() {
       const tbody = document.getElementById('eventsTableBody');
