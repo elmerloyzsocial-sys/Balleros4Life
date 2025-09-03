@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <title>Balleros4Life</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balleros4Life</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     :root {
       --primary: #263238;
@@ -19,12 +26,49 @@
       color: #222;
     }
     header {
-      background: var(--primary);
-      color: #fff;
+      background-image: url('images/background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
       padding: 1.2em 1em;
       text-align: center;
       font-size: 1.3em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header h2 {
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      font-size: 1.15em;
+      margin: 0.5em 0 0;
+    }
+    header h2 img {
+      height: 48px;
+      width: 30px;
+      vertical-align: top;
+    }
+    header nav {
+      margin-top: 10px;
+    }
+    header nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1em;
+    }
+    header nav a:hover {
+      text-decoration: underline;
     }
     main {
       max-width: 450px;
@@ -42,10 +86,10 @@
     .menu-card {
       background: var(--card);
       border-radius: 10px;
-      padding: 1.2em 0.8em;		/* was 1.2em 0.8em */
-      min-width: 120px;   	/* was 120px */
-      max-width: 160px;		/* was 160px */
-      flex: 1 1 140px;		/* was 140px */
+      padding: 1.2em 0.8em;
+      min-width: 120px;
+      max-width: 160px;
+      flex: 1 1 140px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       border: 1px solid var(--border);
       text-align: center;
@@ -53,7 +97,7 @@
       cursor: pointer;
       text-decoration: none;
       color: inherit;
-      font-size: 1.13em;		/* was 1.13em */
+      font-size: 1.13em;
       font-weight: 500;
       letter-spacing: -0.5px;
       position: relative;
@@ -189,6 +233,10 @@
       section { padding: 0.6em; }
       th, td { font-size: 0.95em; padding: 5px 3px; }
       h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
+      header { padding: 0.8em 0.5em; }
+      header h1 { font-size: 2em; }
+      header h2 { font-size: 1em; }
+      header nav a { margin: 0 10px; font-size: 1em; }
     }
     footer {
       text-align: center;
@@ -196,34 +244,37 @@
       color: #999;
       margin: 2em 0 1em 0;
     }
-    .site-header {
-      background-image: url('images/background.jpg'); /* Path to your image in the repository */
-      background-size: cover; /* Ensures the image covers the entire header */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
-      color: white; /* Text color for contrast, adjust as needed */
-      padding: 20px; /* Optional: Adds padding for better appearance */
-    }
-    .header-content {
-      max-width: 1200px; /* Optional: Limits content width */
-      margin: 0 auto; /* Centers content */
-    }
-    .site-header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-    .site-header nav {
-      margin-top: 10px;
-    }
-    .site-header nav a {
-      color: white; /* Link color for contrast */
-      text-decoration: none; /* Removes underline from links */
-      margin: 0 15px; /* Spacing between links */
-      font-size: 1.1em;
-    }
-    .site-header nav a:hover {
-      text-decoration: underline; /* Underline on hover for better UX */
-    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Balleros4Life</h1>
+      <h2>
+        <img src="images/logo.png" alt="Team Logo">
+        Team RnR Sportswear
+      </h2>
+      <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+        <a href="stats.html"><i class="fas fa-chart-bar"></i> Stats</a>
+        <a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+        <a href="advice.html"><i class="fas fa-basketball-ball"></i> Coach Advice</a>
+        <a href="plays.html"><i class="fas fa-chalkboard"></i> Plays</a>
+        <a href="standing.html"><i class="fas fa-list-ol"></i> Standings</a>
+        <a href="photos.html"><i class="fas fa-photo-film"></i> Player Profile</a>
+        <a href="playoff.html"><i class="fas fa-trophy"></i> Playoffs</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <!-- Placeholder for main content, e.g., menu-grid, sections -->
+  </main>
+  <footer>
+    <p>&copy; 2025 Balleros4Life. All rights reserved.</p>
+  </footer>
+</body>
+</html>
   </style>
 </head>
 <body>
