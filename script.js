@@ -17,7 +17,7 @@ const standing = [
   { name: 'World Remit', record: '6–2', pointDifferential: 45 },
   { name: 'Ted Fencing', record: '5–3', pointDifferential: 71 },
   { name: "Henry's Harvest", record: '5–3', pointDifferential: 54 },
-  { name: 'Hype Signs', record: '5���3', pointDifferential: 18 },
+  { name: 'Hype Signs', record: '5–3', pointDifferential: 18 },
   { name: 'Laserbond', record: '4–4', pointDifferential: 15 },
   { name: 'Elegance Eyewear', record: '4–3', pointDifferential: -4 },
   { name: 'Prime One', record: '4–4', pointDifferential: -5 },
@@ -70,39 +70,6 @@ function getPlayerPhotos() {
 }
 function savePlayerPhotos(photos) {
   localStorage.setItem('playerPhotos', JSON.stringify(photos));
-}
-
-// Gallery fetch from GitHub
-const repoOwner = "elmerloyzsocial-sys";
-const repoName = "Balleros4Life";
-const galleryFolder = "gallery";
-
-async function fetchGalleryImages() {
-  const galleryDiv = document.getElementById("galleryFull");
-  if (!galleryDiv) return;
-
-  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Failed to fetch gallery images.");
-    const files = await response.json();
-
-    // Only show image files (jpg, jpeg, png, gif)
-    const imgFiles = files.filter(file =>
-      /\.(jpg|jpeg|png|gif)$/i.test(file.name)
-    );
-
-    // Display images
-    galleryDiv.innerHTML = imgFiles.map(file => `
-      <div class="galleryItem">
-        <img src="${file.download_url}" alt="${file.name}" class="galleryImg" />
-        <p>${file.name}</p>
-      </div>
-    `).join("");
-  } catch (err) {
-    galleryDiv.innerHTML = "<p>Could not load gallery images.</p>";
-    console.error(err);
-  }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -163,28 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Gallery preview (uses GitHub API, shows first 3 images)
-    const galleryPreviewDiv = document.getElementById('galleryPreview');
-    if (galleryPreviewDiv) {
-      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${galleryFolder}`;
-      fetch(apiUrl).then(response => {
-        if (!response.ok) throw new Error("Failed to fetch gallery images.");
-        return response.json();
-      }).then(files => {
-        const imgFiles = files.filter(file =>
-          /\.(jpg|jpeg|png|gif)$/i.test(file.name)
-        );
-        let previewHTML = '';
-        imgFiles.slice(0, 3).forEach(file => {
-          previewHTML += `<div>
-            <img src="${file.download_url}" alt="${file.name}" class="galleryImg"><br>
-            <small>${file.name}</small>
-          </div>`;
-        });
-        galleryPreviewDiv.innerHTML = previewHTML;
-      }).catch(err => {
-        galleryPreviewDiv.innerHTML = "<p>Could not load gallery preview.</p>";
-      });
-    }
+    // REMOVED: The gallery preview and fetch logic is now in gallery.js
   }
 
   // Team Stats Table (if on separate page/section)
@@ -210,33 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     teamStatsHTML += `</table>`;
     document.getElementById('teamStatsTable').innerHTML = teamStatsHTML;
-  }
-
-  // Gallery Page: Full gallery and upload form
-  if (document.getElementById('galleryFull')) {
-    fetchGalleryImages();
-
-    // Upload form (local preview only)
-    if (document.getElementById('uploadForm')) {
-      document.getElementById('uploadForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const fileInput = document.getElementById('photoUpload');
-        const caption = document.getElementById('photoCaption').value;
-        const file = fileInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(ev) {
-            const imgURL = ev.target.result;
-            const div = document.createElement('div');
-            div.innerHTML = `<img src="${imgURL}" alt="${caption}" class="galleryImg"><br><small>${caption}</small>`;
-            document.getElementById('galleryFull').prepend(div);
-          };
-          reader.readAsDataURL(file);
-          fileInput.value = '';
-          document.getElementById('photoCaption').value = '';
-        }
-      });
-    }
   }
 
   // Stats page (global stats table)
