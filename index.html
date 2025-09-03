@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Balleros4Life</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -33,7 +66,6 @@
       color: white;
       padding: 1.2em 1em;
       text-align: center;
-      font-size: 1.3em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     .header-content {
@@ -56,10 +88,10 @@
     header h2 img {
       height: 48px;
       width: 30px;
-      vertical-align: top;
+      vertical-align: middle;
     }
     header nav {
-      margin-top: 10px;
+      margin-top: 1em;
     }
     header nav a {
       color: white;
@@ -103,7 +135,10 @@
       position: relative;
       margin-bottom: 0.5em;
     }
-    .menu-card:active,
+    .menu-card:active {
+      background: var(--accent);
+      color: #222;
+    }
     .menu-card:hover {
       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
       transform: translateY(-2px) scale(1.03);
@@ -117,9 +152,17 @@
     }
     @media (max-width: 480px) {
       main { max-width: 99vw; padding: 0.5em; }
-      .menu-card { font-size: 1em; min-width: 160px; max-width: 220px; padding: 1.5em 1.1em; }
+      .menu-card { font-size: 1em; min-width: 140px; max-width: 48vw; padding: 1.5em 1.1em; }
       .menu-card span { font-size: 1.35em; }
       .menu-grid { gap: 0.7em; }
+      header { padding: 0.8em 0.5em; }
+      header h1 { font-size: 2em; }
+      header h2 { font-size: 1em; }
+      header h2 img { height: 36px; width: 22px; }
+      header nav a { margin: 0 10px; font-size: 1em; }
+      section { padding: 0.6em; }
+      th, td { font-size: 0.95em; padding: 5px 3px; }
+      h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
     }
     section {
       background: var(--card);
@@ -133,7 +176,7 @@
       color: var(--primary);
       font-size: 1.15em;
       margin-top: 0;
-      margin-bottom: .7em;
+      margin-bottom: 0.7em;
     }
     .responsive-table { overflow-x: auto; }
     table {
@@ -227,16 +270,12 @@
       font-size: 1em;
       font-weight: 600;
     }
-    .about-contact p, .about-contact ul { margin-top: 0.3em; font-size: 0.97em; }
-    .about-contact ul { padding-left: 1.2em; }
-    @media (max-width: 480px) {
-      section { padding: 0.6em; }
-      th, td { font-size: 0.95em; padding: 5px 3px; }
-      h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
-      header { padding: 0.8em 0.5em; }
-      header h1 { font-size: 2em; }
-      header h2 { font-size: 1em; }
-      header nav a { margin: 0 10px; font-size: 1em; }
+    .about-contact p, .about-contact ul {
+      margin-top: 0.3em;
+      font-size: 0.97em;
+    }
+    .about-contact ul {
+      padding-left: 1.2em;
     }
     footer {
       text-align: center;
@@ -247,10 +286,14 @@
   </style>
 </head>
 <body>
-  <header>
+  <header role="banner">
     <div class="header-content">
       <h1>Balleros4Life</h1>
-      <nav>
+      <h2>
+        <img src="images/logo.png" alt="Team Logo">
+        Team RnR Sportswear
+      </h2>
+      <nav role="navigation">
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
         <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
         <a href="stats.html"><i class="fas fa-chart-bar"></i> Stats</a>
@@ -264,15 +307,7 @@
     </div>
   </header>
   <main>
-    <!-- Placeholder for main content, e.g., menu-grid, sections -->
-  </main>
-</body>
-</html>
-  </style>
-</head>
-<body>
-  <main>
-    <nav class="menu-grid">
+    <div class="menu-grid">
       <a class="menu-card" href="nextgame.html">
         <span>🏀</span>
         Next Game
@@ -297,33 +332,47 @@
         <span>📖</span>
         Plays
       </a>
-	  <a class="menu-card" href="calendar.html">
-		<span>📅</span>
-		Calendar
-	  </a>
-	  <a class="menu-card" href="standing.html">
-        <span>📊</span>
-        Standing
+      <a class="menu-card" href="calendar.html">
+        <span>📅</span>
+        Calendar
       </a>
-	  <a class="menu-card" href="playoff.html">
+      <a class="menu-card" href="standing.html">
+        <span>📊</span>
+        Standings
+      </a>
+      <a class="menu-card" href="playoff.html">
         <span>🔥</span>
         Playoff Matchup
       </a>
-	  <!-- Added Basketball Tools menu card -->
       <a class="menu-card" href="tools.html">
         <span>🛠️</span>
         Basketball Tools
       </a>
-    </nav>
+    </div>
+    <section>
+      <h2>Upcoming Events</h2>
+      <div class="responsive-table">
+        <table class="event-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Opponent</th>
+              <th>Time</th>
+              <th>Our Score</th>
+              <th>Opp Score</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="eventsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
     <section>
       <h2>YouTube Resources</h2>
-		<div>
-  			<h3>Featured Video</h3>
- 				<iframe width="360" height="215"
-				src="https://www.youtube.com/embed/l9HvW078SYA?si=YypURyUoGKBc2lHx"  /* src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" */
-    			frameborder="0" allowfullscreen>
-  				</iframe>
-		</div>
+      <div>
+        <h3>Featured Video</h3>
+        <iframe width="100%" height="215" src="https://www.youtube.com/embed/l9HvW078SYA?si=YypURyUoGKBc2lHx" frameborder="0" allowfullscreen></iframe>
+      </div>
       <form class="yt-form" id="ytForm">
         <select id="ytType">
           <option value="offense">Offense</option>
@@ -347,7 +396,6 @@
         <ul class="yt-list" id="ytInplay"></ul>
       </div>
     </section>
-
     <section class="about-contact">
       <h3>About Us</h3>
       <p>Balleros4Life is a community basketball club dedicated to teamwork, fun, and growth. We organize matches, events, and training for all skill levels.</p>
@@ -359,17 +407,16 @@
       </ul>
     </section>
   </main>
-    <script>
-    // --- EVENTS / TEAM GAMES TABLE ---
+  <footer>
+    <p>&copy; 2025 Balleros4Life. All rights reserved.</p>
+  </footer>
+  <script>
     const games = [
-      // Add your upcoming schedules here:
       { date: '2025-08-30', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
       { date: '2025-08-31', opponent: 'PBAO Family Day', time: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
-      { date: '2025-09-06', opponent: 'Henry's Harvest', time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
+      { date: '2025-09-06', opponent: 'Henry\'s Harvest', time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
       { date: '2025-09-13', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
-      // You can add more Saturday games like this:
       { date: '2025-09-20', opponent: 'TBD', time: 'Home', result: null, ourScore: null, oppScore: null },
-      // Playoffs
       { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
     ];
     function renderEventsTable() {
@@ -385,7 +432,6 @@
         </tr>
       `).join('');
     }
-    // --- YOUTUBE LINKS ---
     function getYT() {
       return JSON.parse(localStorage.getItem('ytLinks') || '{"offense":[],"defense":[],"inplay":[]}');
     }
@@ -433,8 +479,5 @@
       });
     });
   </script>
-  <footer>
-    &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
-  </footer>
 </body>
 </html>
