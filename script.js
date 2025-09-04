@@ -45,14 +45,19 @@ const plays = [
     desc: "Clear the court to let a strong scorer take on their defender 1-on-1."
   }
 ];
+const players = [
+	{ 
+	name: "Loyz", img: "images/players/Loyz.jpg" },
+	name: "Jerwin", img: "images/players/Jerwin.jpg" },
+];
 
-const advice = {
+/* const advice = {
   offense: "Move the ball quickly, look for open shots, and set effective screens. Avoid stagnant offense.",
   defense: "Communicate, switch on screens if needed, and always box out after a shot. Defense wins games!",
   teamwork: "Trust each other, keep heads up for passes, and celebrate small wins together.",
   conditioning: "Run sprints, focus on agility drills, and hydrate before and after games.",
   shooting: "Practice form daily, focus on follow-through, and use legs for power."
-};
+}; */
 
 document.addEventListener("DOMContentLoaded", function() {
   // Home page: Next Game, Standings, Team Stats, Gallery Preview
@@ -154,13 +159,13 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Advice page
-  if (document.getElementById('adviceResult') && document.getElementById('adviceForm')) {
+  /* if (document.getElementById('adviceResult') && document.getElementById('adviceForm')) {
     document.getElementById('adviceForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const topic = document.getElementById('adviceTopic').value;
       document.getElementById('adviceResult').innerHTML = `<div class="advice"><b>${topic.charAt(0).toUpperCase()+topic.slice(1)}:</b> ${advice[topic]}</div>`;
     });
-  }
+  } */
 
   // Plays page
   if (document.getElementById('playsList')) {
