@@ -293,6 +293,17 @@
       color: #999;
       margin: 2em 0 1em 0;
     }
+	iframe {
+	  width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+	}
+	.yt-section, .yt-section + .yt-section, .yt-section + form, form + .yt-section {
+     margin-bottom: 1.5em;
+	}
+      div:has(> iframe) {
+      margin-bottom: 1.5em;
+	}
   </style>
 </head>
 <body>
@@ -382,6 +393,10 @@
         <h3>Featured Video</h3>
         <iframe width="100%" height="215" src="https://www.youtube.com/embed/l9HvW078SYA?si=YypURyUoGKBc2lHx" frameborder="0" allowfullscreen></iframe>
       </div>
+	  <div>
+		<h3>Previous Featured Video</h3>
+		<iframe width="100%" height="215" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+	  </div>
       <form class="yt-form" id="ytForm">
         <select id="ytType">
           <option value="offense">Offense</option>
