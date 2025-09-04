@@ -86,18 +86,10 @@
       line-height: 1.2;
     }
     header .subtitle {
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-      font-size: 1.15em;
+      font-size: 1.5em;
       font-weight: 500;
-      color: var(--accent);
+      color: #ffffff;
       margin: 0;
-    }
-    header .subtitle img {
-      height: 48px;
-      width: 30px;
-      vertical-align: middle;
     }
     header nav {
       margin-top: 1em;
@@ -176,13 +168,11 @@
       .menu-grid { gap: 0.7em; }
       header { padding: 0.8em 0.5em; }
       header h1 { font-size: 2em; }
-      header .subtitle { font-size: 1em; }
-      header .subtitle img { height: 36px; width: 22px; }
-      header nav a { margin: 0 10px; font-size: 1em; }
+      header .subtitle { font-size: 1.2em; }
+      .header-title { flex-direction: column; gap: 0.3em; }
       section { padding: 0.6em; }
       th, td { font-size: 0.95em; padding: 5px 3px; }
       h2, .yt-section h3, .about-contact h3 { font-size: 1em; }
-      .header-title { flex-direction: column; gap: 0.3em; }
     }
     section {
       background: var(--card);
@@ -310,10 +300,7 @@
     <div class="header-content">
       <div class="header-title">
         <h1>Balleros4Life</h1>
-        <div class="subtitle">
-          <img src="images/logo.png" alt="Team Logo">
-          Team RnR Sportswear
-        </div>
+        <div class="subtitle">Team RnR Sportswear</div>
       </div>
       <nav role="navigation">
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
