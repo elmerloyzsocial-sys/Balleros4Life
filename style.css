@@ -171,7 +171,7 @@ th {
 }
 /* this block ^ to copy */
 /* this is for GALLERY HTML - copy the below line to create more for other HTML */
-.card-bgal-img {
+.card-abgal-img {
   background-image: url('images/gallery_banner.jpg'); /* Update the path to your actual image */
   background-size: cover;
   background-position: center;
@@ -180,7 +180,7 @@ th {
   /* Optional: add a semi-transparent overlay for readability */
 }
 
-.card-bgal-img::before {
+.card-abgal-img::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -188,7 +188,7 @@ th {
   border-radius: 8px;
   pointer-events: none;
 }
-.card-bgal-img > * {
+.card-abgal-img > * {
   position: relative;
   z-index: 1;
 }
