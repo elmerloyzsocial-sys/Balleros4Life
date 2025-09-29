@@ -6,7 +6,7 @@ const games = [
   { date: '2025-08-31', opponent: 'PBAO Family Day', time: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
   { date: '2025-09-06', opponent: "Henry's Harvest", time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
   { date: '2025-09-13', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
-  { date: '2025-09-20', opponent: 'TBD', time: 'Home', result: null, ourScore: null, oppScore: null },
+  { date: '2025-09-20', opponent: 'Simplly Fin Wiz (Y)', time: '6:30PM', result: 'Comp', ourScore: null, oppScore: null },
   { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
 ];
 

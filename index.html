@@ -390,11 +390,15 @@
     <section>
       <h2>YouTube Resources</h2>
       <div>
-        <h3>Featured Video</h3>
+		<h3>Featured Video</h3>
+		<iframe width="100%" height="215" src="https://www.youtube.com/embed/kVbU-nvGy1o?si=1Tum7ibzg2N6GLmW" frameborder="0" allowfullscreen></iframe>
+	  </div>
+	  <div>
+        <h3>Previous Featured Video</h3>
         <iframe width="100%" height="215" src="https://www.youtube.com/embed/l9HvW078SYA?si=YypURyUoGKBc2lHx" frameborder="0" allowfullscreen></iframe>
       </div>
 	  <div>
-		<h3>Previous Featured Video</h3>
+		<h3>Old Featured Video</h3>
 		<iframe width="100%" height="215" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
 	  </div>
       <form class="yt-form" id="ytForm">
@@ -438,10 +442,12 @@
     const games = [
       { date: '2025-08-30', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
       { date: '2025-08-31', opponent: 'PBAO Family Day', time: '11:00AM', result: 'Event', ourScore: null, oppScore: null },
-      { date: '2025-09-06', opponent: 'Henry\'s Harvest', time: '3:30PM', result: 'Comp', ourScore: null, oppScore: null },
+      { date: '2025-09-06', opponent: 'Henrys Harvest', time: '3:30PM', result: 'Win', ourScore: '56', oppScore: '37' },
       { date: '2025-09-13', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
-      { date: '2025-09-20', opponent: 'TBD', time: 'Home', result: null, ourScore: null, oppScore: null },
-      { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
+      { date: '2025-09-20', opponent: 'Simplly Fin Wiz', time: '6:30PM', result: 'Win', ourScore: '82', oppScore: '47' },
+	  { date: '2025-09-27', opponent: 'Angies Vlog', time: '6:30PM', result: 'Win', ourScore: '72', oppScore: '52' },
+      { date: '2025-10-04', opponent: 'No games', time: '-', result: 'Rest', ourScore: null, oppScore: null },
+	  { date: '2025-10-11', opponent: 'Playoffs', time: '11:00AM', result: 'Playoff', ourScore: null, oppScore: null }
     ];
     function renderEventsTable() {
       const tbody = document.getElementById('eventsTableBody');
