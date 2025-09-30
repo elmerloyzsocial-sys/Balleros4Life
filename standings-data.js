@@ -1,5 +1,5 @@
 // Example standings data structure
-const windows.standing = [
+window.standing = [
   // Example
   { name: 'Masagana', record: '10–0', pointDifferential: 131 },
   { name: 'World Remit', record: '6–4', pointDifferential: 34 },
