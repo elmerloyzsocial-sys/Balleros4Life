@@ -18,7 +18,7 @@ function groupImagesByDate(imgFiles) {
     } else if (file.lastModified) {
       date = formatDate(file.lastModified);
     } else {
-      date = "Unknown Date";
+      date = "Team Photo";
     }
     if (!imagesByDate[date]) {
       imagesByDate[date] = [];
