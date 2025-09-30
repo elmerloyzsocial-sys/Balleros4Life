@@ -149,7 +149,7 @@ th {
 }
 /* this is for NEXTGAME HTML - copy the below line to create more for other HTML */
 .card-bg-img {
-  background-image: url('images/nextgame_banner.jpg'); /* Update the path to your actual image */
+  background-image: url('images/gallery_banner.jpg'); /* Update the path to your actual image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
