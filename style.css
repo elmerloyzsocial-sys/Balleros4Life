@@ -147,7 +147,6 @@ th {
   border-radius: 8px; /* optional: for rounded look */
   box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* optional: for subtle shadow */
 }
-/* this is for NEXTGAME HTML - copy the below line to create more for other HTML */
 .card-bg-img {
   background-image: url('images/gallery_banner.jpg'); /* Update the path to your actual image */
   background-size: cover;
@@ -169,6 +168,6 @@ th {
   position: relative;
   z-index: 1;
 }
-/* this block ^ to copy */
+
 
 
