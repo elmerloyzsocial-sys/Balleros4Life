@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
-  background: #f8fafc; /* background: #f8fafc; */
+  background: #f8fafc;
   color: #222;
 }
 header {
@@ -29,7 +29,7 @@ nav a:hover {
 main {
   max-width: 700px;
   margin: 2em auto;
-  background: #fff; /* background: #fff; */
+  background: #fff;
   padding: 2em;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
@@ -70,20 +70,81 @@ input, select {
 form {
   margin-bottom: 1.5em;
 }
-#galleryPreview img, #galleryFull img {
-  max-width: 150px;
-  max-height: 120px;
-  border-radius: 6px;
-  margin: 0.5em;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
+
+/* Gallery v2 styles */
 #galleryFull {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
+  padding: 10px;
 }
-#galleryPreview {
+.galleryDateGroup {
+  margin-bottom: 25px;
+  border-radius: 8px;
+  background: rgba(25,118,210,0.05);
+  box-shadow: 0 2px 8px rgba(25,118,210,0.04);
+}
+.galleryDateGroup h2 {
+  margin-bottom: 7px;
+  font-size: 1.2em;
+  color: #1976d2;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  background: #e3e3e3;
+}
+.galleryDateGroup h2.open {
+  background: #1976d2;
+  color: #fff;
+}
+.galleryDateImages {
   display: flex;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 10px 0 10px 12px;
+  scroll-snap-type: x mandatory;
+}
+.galleryItem {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+  margin: 0;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 4px 0 8px 0;
+}
+.galleryImg {
+  width: 96%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.11);
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-bottom: 4px;
+}
+.galleryImg:hover {
+  transform: scale(1.05);
+}
+.lightboxImg {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.lightboxClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.lightboxClose:hover {
+  color: #fbc02d;
 }
 @media (max-width: 600px) {
   main {
@@ -97,70 +158,31 @@ form {
     display: inline-block;
     margin: 0.3em 0.7em;
   }
-  #galleryPreview img, #galleryFull img {
-    max-width: 95px;
-    max-height: 80px;
+  .galleryDateImages {
+    gap: 7px;
+    padding-left: 7px;
+  }
+  .galleryItem {
+    width: 115px;
+  }
+  .galleryImg {
+    width: 95%;
   }
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0.7em 0;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 0.5em;
-  text-align: center;
-}
-th {
-  background: #fbc02d;
-  color: #222;
-}
-.galleryItem {
-  display: inline-block;
-  text-align: center;
-  margin: 10px;
-}
-.galleryImg {
-  max-width: 200px;
-  max-height: 200px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 12px #aaa;
-}
-.player-photo {
-  max-width: 100px;   /* or whatever logo size you prefer */
-  max-height: 100px;
-  width: auto;
-  height: auto;
-  display: block;
-  margin: 10px auto;  /* centers the image, optional */
-  border-radius: 8px; /* optional: rounded corners for a logo look */
-}
-#playerPhotos img {
-  max-width: 100px;
-  max-height: 100px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: inline-block;
-  margin: 10px;
-  border-radius: 8px; /* optional: for rounded look */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* optional: for subtle shadow */
-}
+
+/* Banner background (unchanged) */
 .card-bg-img {
-  background-image: url('images/gallery_banner.jpg'); /* Update the path to your actual image */
+  background-image: url('images/gallery_banner.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  /* Optional: add a semi-transparent overlay for readability */
 }
-
 .card-bg-img::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.9); /* White overlay with 90% opacity */
+  background: rgba(255,255,255,0.9);
   border-radius: 8px;
   pointer-events: none;
 }
@@ -168,6 +190,3 @@ th {
   position: relative;
   z-index: 1;
 }
-
-
-
