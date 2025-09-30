@@ -59,8 +59,9 @@
   </header>
   <main>
     <h2>Division 3–4 Playoff Bracket</h2>
-    <div class="standings-placeholder">
-      <!-- Division 3 Playoffs -->
+    <div id="react-root"></div> 
+       
+	  <!--
       <h3><i class="fas fa-basketball-ball"></i> Division 3 Playoffs</h3>
       <table id="division3-playoff-table">
         <thead>
@@ -91,7 +92,7 @@
          </tbody>
       </table>
 
-      <!-- Division 4 Playoffs -->
+      
       <h3><i class="fas fa-basketball-ball"></i> Division 4 Playoffs</h3>
       <table id="division4-playoff-table">
         <thead>
@@ -141,7 +142,7 @@
         </tbody>
       </table>
 
-      <!-- Eliminated Team -->
+     Eliminated Team 
       <h3><i class="fas fa-times-circle" style="color:red;"></i> Eliminated Team</h3>
       <table id="eliminated-table">
         <thead>
@@ -160,14 +161,13 @@
             <td style="color:red; font-weight:bold;">ELIMINATED</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <p><a href="index.html">Back to Home</a></p>
-    </div>
-  </main>
+      </main>
   <footer>
     &copy; 2025 Balleros4Life &mdash; Mobile Club Portal
   </footer>
-  <script src="script.js"></script>
+  <!--<script src="script.js"></script>-->
   <script>
     // Dynamically fill playoff matchups using standings data
     document.addEventListener('DOMContentLoaded', function () {
@@ -224,5 +224,9 @@
       }
     });
   </script>
+	<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+	<script src="standings-data.js"></script>
+	<script src="playoff-react.js"></script>
 </body>
 </html>
