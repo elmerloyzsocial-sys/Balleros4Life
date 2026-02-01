@@ -54,12 +54,12 @@ function renderPlayerProfiles() {
   
   playerData.forEach(player => {
     const stats = calculatePlayerStats(player.name);
-    const photoUrl = player.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(player.name)}&background=243d68&color=fff&size=128`;
+    const photoUrl = player.photo || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Crect fill='%23243d68' width='128' height='128'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial' font-size='48' font-weight='bold'%3E" + player.name.charAt(0) + "%3C/text%3E%3C/svg%3E";
     
     html += `
       <div class="player-card">
         <div class="player-card-header">
-          <img src="${photoUrl}" alt="${player.name}" class="player-photo" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(player.name)}&background=243d68&color=fff&size=128'">
+          <img src="${photoUrl}" alt="${player.name}" class="player-photo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22128%22 height=%22128%22%3E%3Crect fill=%22%23243d68%22 width=%22128%22 height=%22128%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%220.35em%22 fill=%22white%22 font-family=%22Arial%22 font-size=%2248%22 font-weight=%22bold%22%3E${player.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
           <div class="player-info">
             <h3>${player.name}</h3>
             <div class="player-number">Jersey #${player.number}</div>
